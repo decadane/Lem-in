@@ -6,11 +6,9 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 19:15:38 by ffahey            #+#    #+#             */
-/*   Updated: 2019/01/30 18:18:39 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/01/30 18:38:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//////kmedhurs comment
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
@@ -40,11 +38,11 @@ typedef struct		s_farm
 	size_t	rooms_count;
 	t_room	*rooms;
 	size_t	ants_count;
+//ffahey part
+
 	char	**ants;
 	int		**link_mtx;
 }					t_farm;
-
-//ffahey part
 
 t_farm				*ft_init_farm(t_farm **farm);
 
