@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 19:15:38 by ffahey            #+#    #+#             */
-/*   Updated: 2019/01/30 19:32:19 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/30 19:37:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,19 @@
 # include <stdlib.h>
 # include "libft.h"
 
+# define OUT_OF_MEMORY -1
+
 # define START	-1
 # define END	-2
 
 # define ROOM	farm->room->name
 # define ANT(i)	farm->ants[i]
+# define LINKS	farm->links
 
 typedef struct		s_room
 {
 	char	*name;
-	int		id;
+	t_room	*links;
 	int		x;
 	int		y;
 	char	state;//START, END or ant number
@@ -38,12 +41,11 @@ typedef struct		s_farm
 	size_t	rooms_count;
 	t_room	*rooms;
 	size_t	ants_count;
-//ffahey part
-
 	char	**ants;
 }					t_farm;
 
-t_farm				*ft_init_farm(t_farm **farm);
+//ffahey part
 
+//kmedhurs part
 
 #endif
