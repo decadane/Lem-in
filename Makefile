@@ -3,56 +3,49 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: ffahey <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/12/18 17:04:30 by marvin            #+#    #+#              #
-#    Updated: 2019/01/26 19:43:11 by marvin           ###   ########.fr        #
+#    Created: 2019/01/29 19:04:47 by ffahey            #+#    #+#              #
+#    Updated: 2019/01/30 17:28:00 by ffahey           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME_PUSH = push_swap
-NAME_CHECK = checker
+SRC_PATH=srcs
+HEAD_PATH=includes
+BIN_PATH=bin
+LIB_PATH=libft
 
-vpath %.c srcs/checker srcs/push_swap srcs/operations
-vpath %.h includes
-vpath %.o bin
+LIB_INC:=-L$(LIB_PATH) -lft
 
-FLAGS = -Wall -Wextra -Werror
+CFLAGS=#-Wall -Wextra -Werror
 
-OBJ_PUSH = $(addprefix bin/,$(notdir $(patsubst %.c,%.o,$(wildcard srcs/push_swap/*.c))))
-OBJ_CHECK = $(addprefix bin/,$(notdir $(patsubst %.c,%.o,$(wildcard srcs/checker/*.c))))
-OBJ_OPER = $(addprefix bin/,$(notdir $(patsubst %.c,%.o,$(wildcard srcs/operations/*.c))))
+NAME=lem-in
+LIB_NAME=libft.a
 
-HEADERS = $(wildcard includes/*.h)
+SRC=lem-in.c ft_init_farm.c
+OBJ=$(addprefix $(BIN_PATH)/,$(SRC:.c=.o))
 
-LIB = libft/libft.a
+.PHONY: all clean fclean re
 
-all: makedir make_lib $(NAME_PUSH) $(NAME_CHECK)
+all: $(NAME)
 
-makedir:
-	@mkdir -p bin
+$(NAME): $(BIN_PATH) $(LIB_NAME) $(OBJ)
+	gcc -o $@ $(OBJ) $(LIB_INC)
 
-make_lib:
-	make -C libft/
+$(LIB_NAME):
+	make -C $(LIB_PATH)
 
-$(NAME_PUSH): $(OBJ_PUSH) $(OBJ_OPER) $(LIB)
-	gcc $(FLAGS) $^ -o $@ -Iincludes -Ilibft/includes -Llibft -lft
 
-$(NAME_CHECK): $(OBJ_CHECK) $(OBJ_OPER) $(LIB)
-	gcc $(FLAGS) $^ -o $@ -Iincludes -Ilibft/includes -Llibft -lft
+$(BIN_PATH):
+	mkdir -p $(BIN_PATH)
 
-bin/%.o: %.c $(HEADERS)
-	gcc $(FLAGS) -c $< -o $@ -Iincludes -Ilibft/includes
+$(BIN_PATH)/%.o: $(SRC_PATH)/%.c $(HEAD_PATH)/lem-in.h
+	gcc $(CFLAGS) -o $@ -c $< -Iincludes -Ilibft
 
 clean:
-	rm -rf bin/
-	rm -rf libft/bin/
+	rm -rf bin
 
 fclean: clean
-	rm -f $(NAME_PUSH)
-	rm -f $(NAME_CHECK)
-	rm -f $(LIB)
+	rm -f $(NAME)
 
 re: fclean all
-
-.PHONY: all clean fclean re make_lib
