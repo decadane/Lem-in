@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 19:15:38 by ffahey            #+#    #+#             */
-/*   Updated: 2019/01/30 18:21:58 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/30 18:18:39 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct		s_farm
 	int		**link_mtx;
 }					t_farm;
 
-//initialization functions
+//ffahey part
 
 t_farm				*ft_init_farm(t_farm **farm);
 
