@@ -6,7 +6,7 @@
 #    By: ffahey <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/29 19:04:47 by ffahey            #+#    #+#              #
-#    Updated: 2019/01/30 17:28:00 by ffahey           ###   ########.fr        #
+#    Updated: 2019/01/31 20:21:47 by ffahey           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ CFLAGS=#-Wall -Wextra -Werror
 NAME=lem-in
 LIB_NAME=libft.a
 
-SRC=lem-in.c ft_init_farm.c
+SRC=allocation_functions.c free_functions.c ft_error_output.c ft_init_farm.c lem-in.c ft_read_rooms.c
 OBJ=$(addprefix $(BIN_PATH)/,$(SRC:.c=.o))
 
 .PHONY: all clean fclean re

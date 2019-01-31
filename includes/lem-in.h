@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 19:15:38 by ffahey            #+#    #+#             */
-/*   Updated: 2019/01/31 19:03:02 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/01/31 20:41:15 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,12 @@
 typedef struct			s_room
 {
 	char				*name;
-	struct				s_links
-	{
-		struct s_room	*room;
-		struct s_list	*next;
-	}					links;
+	struct s_room		**links;
+	int					degree;
 	int					x;
 	int					y;
 	char				state;//START, END or ant number
-	struct s_room		*next_room;
+	struct s_room		*next;
 }						t_room;
 
 typedef struct		s_farm
@@ -61,15 +58,20 @@ typedef struct		s_farm
 //------------------------ffahey part----------------------------
 
 //allocation_functions
+t_room		*ft_create_room(char **data);
+void		ft_add_room(t_farm *farm, char **data);
 t_farm		*ft_create_farm();
 char		**ft_ants_generator(size_t size);
 
 //free functions
 void		ft_room_destroyer(t_room **room);
-void		ft_farm_destroyer(t_farm **farm);
+void		ft_farm_destroyer(t_farm *farm);
 
+int				ft_is_comment(char	*input_data);
+int				ft_is_modifer(char	*input_data, t_farm *farm);
 t_farm				*ft_init_farm();
-void	ft_error_output(t_farm **farm);
+int					ft_read_rooms(t_farm *farm, char **data);
+void	ft_error_output(t_farm *farm);
 
 //kmedhurs part
 
