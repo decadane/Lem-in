@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 19:20:07 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/02 19:23:56 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/02 20:45:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		main()
 
 	farm = NULL;
 	i = 0;
-	farm = ft_init_farm(&farm);
+	farm = ft_init_farm();
 	ft_print_farm(farm);
 	set = ft_start_bfs(farm);
 	while (i < (int)set->num_of_paths)
