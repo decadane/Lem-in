@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: marvin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/12/18 17:04:30 by marvin            #+#    #+#              #
-#    Updated: 2019/02/02 14:56:10 by marvin           ###   ########.fr        #
+#    Created: 2019/01/29 19:04:47 by ffahey            #+#    #+#              #
+#    Updated: 2019/02/02 17:27:14 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,10 @@ make_lib:
 	make -C libft/
 
 $(NAME): $(OBJ) $(LIB)
-	gcc $(FLAGS) $^ -o $@ -Iincludes -Ilibft/includes -Llibft -lft
+	gcc $(FLAGS) $^ -o $@ -Iincludes -Ilibft -Llibft -lft
 
 bin/%.o: %.c $(HEADERS)
-	gcc $(FLAGS) -c $< -o $@ -Iincludes -Ilibft/includes
+	gcc $(FLAGS) -c $< -o $@ -Iincludes -Ilibft
 
 clean:
 	rm -rf bin/

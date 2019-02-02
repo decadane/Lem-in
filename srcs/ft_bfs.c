@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:52:17 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/02 14:53:05 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/02 18:03:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void			ft_bfs(t_path *path, t_ps **ps, t_room *room, size_t ac)
 		return ;
 	}
 	path = ft_complete_path(path, room);
-	if (room->state == END)
+	if (room->state == END_ROOM)
 	{
 		*ps = ft_new_path(*ps, path);
 		return ;
@@ -92,11 +92,25 @@ t_path_set			*ft_start_bfs(t_farm *farm)
 	t_ps		*ps;
 	t_path		*path;
 	t_path_set	*set;
+	int			i;
+	t_room		*tmp;
 
+	i = -1;
 	set = NULL;
 	ps = NULL;
 	path = NULL;
-	ft_bfs(path, &ps, &farm->rooms[0], farm->ants_count);
+	tmp = farm->rooms;
+	while (++i < (int)farm->rooms_count)
+	{
+		if (farm->rooms->state == START_ROOM)
+		{
+			printf("ID: %d\n", farm->rooms->id);
+			ft_bfs(path, &ps, farm->rooms, farm->ants_count);
+		}
+		else
+			farm->rooms = farm->rooms->next;
+	}
+	farm->rooms = tmp;
 	set = ft_convert_to_arr(ps);
 	return (set);
 }
