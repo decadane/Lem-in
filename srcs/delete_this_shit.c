@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 18:52:38 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/31 20:58:12 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/01 18:06:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ t_farm	*ft_init_farm(void)
 	new_farm = (t_farm*)malloc(sizeof(t_farm));
 	new_farm->rooms_count = 8;
 	new_farm->rooms = NULL;
-	room7 = new_farm->rooms = ft_init_room(new_farm->rooms, "Finish", END, 7);
+	room7 = new_farm->rooms = ft_init_room(new_farm->rooms, "trhogoro", 0, 7);
 	room6 = new_farm->rooms = ft_init_room(new_farm->rooms, "fuck", 0, 6);
-	room5 = new_farm->rooms = ft_init_room(new_farm->rooms, "ebst", 0, 5);
+	room5 = new_farm->rooms = ft_init_room(new_farm->rooms, "kcarrot", 0, 5);
 	room4 = new_farm->rooms = ft_init_room(new_farm->rooms, "huyak", 0, 4);
-	room3 = new_farm->rooms = ft_init_room(new_farm->rooms, "trhogoro", 0, 3);
+	room3 = new_farm->rooms = ft_init_room(new_farm->rooms, "Finish", END, 3);
 	room2 = new_farm->rooms = ft_init_room(new_farm->rooms, "ffahey", 0, 2);
 	room1 = new_farm->rooms = ft_init_room(new_farm->rooms, "kmedhurs", 0, 1);
 	room0 = new_farm->rooms = ft_init_room(new_farm->rooms, "Start", START, 0);

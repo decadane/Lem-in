@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 19:15:38 by ffahey            #+#    #+#             */
-/*   Updated: 2019/01/31 20:49:58 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/02 14:35:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,13 @@ typedef struct			s_path_list
 	struct s_path_list	*next;
 }						t_ps;
 
+typedef struct		s_path_set
+{
+	t_path			**paths;
+	size_t			*lens;
+	size_t			*ants;
+}					t_path_set;
+
 //------------------------ffahey part----------------------------
 
 //kmedhurs part
@@ -78,7 +85,15 @@ t_room				*ft_search_node(t_room *room, int id);
 t_path				*ft_complete_path(t_path *path, t_room *ptr);
 t_ps				*ft_new_path(t_ps *ps, t_path *path);
 t_path				*ft_copy_path(t_path *path);
+
 void				ft_print_path(t_path *path);
-t_ps				*ft_start_bfs(t_farm *farm);
+void				ft_ps_destroyer(t_ps *ps);
+
+t_path_set			*ft_start_bfs(t_farm *farm);
+int					ft_check_path(t_path *path, int id);
+void				ft_path_destroyer(t_path *path);
+
+size_t				ft_path_len(t_path *path);
+size_t				ft_num_paths(t_ps *ps);
 
 #endif

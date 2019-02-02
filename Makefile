@@ -6,7 +6,7 @@
 #    By: marvin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/18 17:04:30 by marvin            #+#    #+#              #
-#    Updated: 2019/01/31 18:18:26 by marvin           ###   ########.fr        #
+#    Updated: 2019/02/02 14:56:10 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ bin/%.o: %.c $(HEADERS)
 
 clean:
 	rm -rf bin/
-	rm -rf libft/bin/
+	rm -rf libft/bin
 
 fclean: clean
 	rm -f $(NAME)
