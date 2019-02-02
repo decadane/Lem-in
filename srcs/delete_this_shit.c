@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 18:52:38 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/01 18:06:34 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/02 19:23:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,68 +40,6 @@ t_room	*ft_init_room(t_room *room, char *name, char state, int id)
 	return (room);
 }
 
-t_farm	*ft_init_farm(void)
-{
-	t_farm	*new_farm;
-	t_room	*room0;
-	t_room	*room1;
-	t_room	*room2;
-	t_room	*room3;
-	t_room	*room4;
-	t_room	*room5;
-	t_room	*room6;
-	t_room	*room7;
-
-	new_farm = (t_farm*)malloc(sizeof(t_farm));
-	new_farm->rooms_count = 8;
-	new_farm->rooms = NULL;
-	room7 = new_farm->rooms = ft_init_room(new_farm->rooms, "trhogoro", 0, 7);
-	room6 = new_farm->rooms = ft_init_room(new_farm->rooms, "fuck", 0, 6);
-	room5 = new_farm->rooms = ft_init_room(new_farm->rooms, "kcarrot", 0, 5);
-	room4 = new_farm->rooms = ft_init_room(new_farm->rooms, "huyak", 0, 4);
-	room3 = new_farm->rooms = ft_init_room(new_farm->rooms, "Finish", END, 3);
-	room2 = new_farm->rooms = ft_init_room(new_farm->rooms, "ffahey", 0, 2);
-	room1 = new_farm->rooms = ft_init_room(new_farm->rooms, "kmedhurs", 0, 1);
-	room0 = new_farm->rooms = ft_init_room(new_farm->rooms, "Start", START, 0);
-	room0->links = (t_room**)malloc(sizeof(t_room*) * 2);
-	room0->links[0] = room1;
-	room0->links[1] = room4;
-	room0->degree = 2;
-	room1->links = (t_room**)malloc(sizeof(t_room*) * 3);
-	room1->links[0] = room0;
-	room1->links[1] = room2;
-	room1->links[2] = room6;
-	room1->degree = 3;
-	room2->links = (t_room**)malloc(sizeof(t_room*) * 3);
-	room2->links[0] = room1;
-	room2->links[1] = room3;
-	room2->links[2] = room5;
-	room2->degree = 3;
-	room3->links = (t_room**)malloc(sizeof(t_room*) * 2);
-	room3->links[0] = room2;
-	room3->links[1] = room7;
-	room3->degree = 2;
-	room4->links = (t_room**)malloc(sizeof(t_room*) * 2);
-	room4->links[0] = room0;
-	room4->links[1] = room5;
-	room4->degree = 2;
-	room5->links = (t_room**)malloc(sizeof(t_room*) * 2);
-	room5->links[0] = room2;
-	room5->links[1] = room4;
-	room5->degree = 2;
-	room6->links = (t_room**)malloc(sizeof(t_room*) * 2);
-	room6->links[0] = room1;
-	room6->links[1] = room7;
-	room6->degree = 2;
-	room7->links = (t_room**)malloc(sizeof(t_room*) * 2);
-	room7->links[0] = room3;
-	room7->links[1] = room6;
-	room7->degree = 2;
-	new_farm->ants_count = 4;
-	new_farm->ants = NULL;
-	return (new_farm);
-}
-
 void	ft_print_farm(t_farm *farm)
 {
 	int		i;
@@ -112,7 +50,7 @@ void	ft_print_farm(t_farm *farm)
 	tmp = farm->rooms;
 	while (++i < (int)farm->rooms_count)
 	{
-		printf("Room: %d, Name: %s", farm->rooms->id, farm->rooms->name);
+		printf("Degree: %d, ID: %d, State: %d", farm->rooms->degree, farm->rooms->id, farm->rooms->state);
 		j = -1;
 		while (++j < farm->rooms->degree)
 			printf(" Ptr: %d", farm->rooms->links[j]->id);

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:52:17 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/02 18:03:14 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/02 19:21:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void			ft_bfs(t_path *path, t_ps **ps, t_room *room, size_t ac)
 	ft_path_destroyer(path);
 }
 
-static void			ft_sort_path_set(t_path_set *set, size_t len)
+static void			ft_sort_path_set(t_path_set *set)
 {
 	size_t	tmp_st;
 	t_path	*tmp_p;
@@ -43,10 +43,10 @@ static void			ft_sort_path_set(t_path_set *set, size_t len)
 	int		j;
 
 	i = -1;
-	while (++i < (int)len)
+	while (++i < (int)set->num_of_paths)
 	{
 		j = -1;
-		while (++j < (int)len - i - 1)
+		while (++j < (int)set->num_of_paths - i - 1)
 		{
 			if (set->lens[j] > set->lens[j + 1])
 			{
@@ -64,25 +64,24 @@ static void			ft_sort_path_set(t_path_set *set, size_t len)
 static t_path_set	*ft_convert_to_arr(t_ps *ps)
 {
 	t_path_set	*set;
-	size_t		len;
 	int			i;
 	t_ps		*tmp;
 
 	i = -1;
 	tmp = ps;
-	len = ft_num_paths(ps);
 	set = (t_path_set*)malloc(sizeof(t_path_set));
-	set->paths = (t_path**)malloc(sizeof(t_path*) * len);
-	set->lens = (size_t*)malloc(sizeof(size_t) * len);
-	set->ants = (size_t*)malloc(sizeof(size_t) * len);
-	while (++i < (int)len)
+	set->num_of_paths  = ft_num_paths(ps);
+	set->paths = (t_path**)malloc(sizeof(t_path*) * set->num_of_paths);
+	set->lens = (size_t*)malloc(sizeof(size_t) * set->num_of_paths);
+	set->ants = (size_t*)malloc(sizeof(size_t) * set->num_of_paths);
+	while (++i < (int)set->num_of_paths)
 	{
 		set->paths[i] = ps->path;
 		set->lens[i] = ft_path_len(ps->path);
 		set->ants[i] = 0;
 		ps = ps->next;
 	}
-	ft_sort_path_set(set, len);
+	ft_sort_path_set(set);
 	ft_ps_destroyer(tmp);
 	return (set);
 }
@@ -104,11 +103,9 @@ t_path_set			*ft_start_bfs(t_farm *farm)
 	{
 		if (farm->rooms->state == START_ROOM)
 		{
-			printf("ID: %d\n", farm->rooms->id);
 			ft_bfs(path, &ps, farm->rooms, farm->ants_count);
 		}
-		else
-			farm->rooms = farm->rooms->next;
+		farm->rooms = farm->rooms->next;
 	}
 	farm->rooms = tmp;
 	set = ft_convert_to_arr(ps);

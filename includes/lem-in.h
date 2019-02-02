@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 19:15:38 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/02 17:34:11 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/02 19:24:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct		s_path_set
 	t_path			**paths;
 	size_t			*lens;
 	size_t			*ants;
+	size_t			num_of_paths;
 }					t_path_set;
 
 //------------------------ffahey part----------------------------
