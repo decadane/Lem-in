@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 19:15:38 by ffahey            #+#    #+#             */
-/*   Updated: 2019/01/31 19:03:02 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/02 14:35:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-# include "libft.h"
 //debug defines
 # define C(a) printf("Check%d\n", a);
 
@@ -29,23 +28,21 @@
 # define END_STR		"##end"
 
 //longtype defines
-# define ROOM	farm->room->name
+# define ROOM	farm->rooms
 # define ANT(i)	farm->ants[i]
 # define LINKS	farm->links
 
 
 typedef struct			s_room
 {
+	int					id;
 	char				*name;
-	struct				s_links
-	{
-		struct s_room	*room;
-		struct s_list	*next;
-	}					links;
+	int					degree;
+	struct s_room		**links;
 	int					x;
 	int					y;
 	char				state;//START, END or ant number
-	struct s_room		*next_room;
+	struct s_room		*next;
 }						t_room;
 
 typedef struct		s_farm
@@ -58,19 +55,45 @@ typedef struct		s_farm
 	char			**ants;
 }					t_farm;
 
+typedef struct		s_path
+{
+	t_room			*room;
+	struct s_path	*next;
+}					t_path;
+
+typedef struct			s_path_list
+{
+	t_path				*path;
+	struct s_path_list	*next;
+}						t_ps;
+
+typedef struct		s_path_set
+{
+	t_path			**paths;
+	size_t			*lens;
+	size_t			*ants;
+}					t_path_set;
+
 //------------------------ffahey part----------------------------
 
-//allocation_functions
-t_farm		*ft_create_farm();
-char		**ft_ants_generator(size_t size);
-
-//free functions
-void		ft_room_destroyer(t_room **room);
-void		ft_farm_destroyer(t_farm **farm);
-
-t_farm				*ft_init_farm();
-void	ft_error_output(t_farm **farm);
-
 //kmedhurs part
+
+t_farm				*ft_init_farm(void);
+void				ft_print_farm(t_farm *farm);
+t_room				*ft_init_room(t_room *room, char *name, char state, int id);
+t_room				*ft_search_node(t_room *room, int id);
+t_path				*ft_complete_path(t_path *path, t_room *ptr);
+t_ps				*ft_new_path(t_ps *ps, t_path *path);
+t_path				*ft_copy_path(t_path *path);
+
+void				ft_print_path(t_path *path);
+void				ft_ps_destroyer(t_ps *ps);
+
+t_path_set			*ft_start_bfs(t_farm *farm);
+int					ft_check_path(t_path *path, int id);
+void				ft_path_destroyer(t_path *path);
+
+size_t				ft_path_len(t_path *path);
+size_t				ft_num_paths(t_ps *ps);
 
 #endif

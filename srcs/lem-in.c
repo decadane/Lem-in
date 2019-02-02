@@ -1,28 +1,21 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   lem-in.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/29 19:20:07 by ffahey            #+#    #+#             */
-/*   Updated: 2019/01/30 18:15:47 by ffahey           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "lem-in.h"
 
 int		main()
 {
-	t_farm	*farm;
-	char	*solution;
+	t_farm		*farm;
+	t_path_set	*set;
+	int			i;
 
-	
-	
-	farm = NULL;
-	farm = ft_init_farm(&farm);
-	bla bla bla
-//	solution = ft_ants_power(farm);
-	
+	i = 0;
+	farm = ft_init_farm();
+	ft_print_farm(farm);
+	set = ft_start_bfs(farm);
+	while (i < 3)
+	{
+		printf("Path: ");
+		ft_print_path(set->paths[i]);
+		printf(", Len: %zu, Ants: %zu\n", set->lens[i], set->ants[i]);
+		i++;
+	}
 	return (0);
 }
