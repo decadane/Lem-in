@@ -6,14 +6,14 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 17:18:10 by ffahey            #+#    #+#             */
-/*   Updated: 2019/01/31 20:53:30 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/02 13:10:33 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
 
-t_farm	*ft_create_farm()
+t_farm		*ft_create_farm()
 {
 	t_farm	*farm;
 
@@ -29,20 +29,20 @@ t_farm	*ft_create_farm()
 	return (farm);
 }
 
-char		**ft_ants_generator(size_t	size)
+void		ft_ants_generator(t_farm *farm)
 {
-	char	**ants;
 	size_t	i;
 
-	if (!(ants = (char**)malloc(sizeof(char*) * (size + 1))))
+	if (farm->ants_count == 0)
+		ft_error_output(farm, "Ants count must be > 0");
+	if (!(farm->ants = (char**)malloc(sizeof(char*) * (farm->ants_count + 1))))
 		exit(OUT_OF_MEMORY);
 	i = 0;
-	while (i <= size)
+	while (i <= farm->ants_count)
 	{
-		ants[i] = NULL;
+		farm->ants[i] = NULL;
 		i++;
 	}
-	return (ants);
 }
 
 t_room		*ft_create_room(char **tab)
@@ -67,20 +67,20 @@ t_room		*ft_create_room(char **tab)
 	}
 	return (room);
 }
+
 void		ft_add_room(t_farm *farm, char **data)
 {
 	t_room		*new_room;
 	
 	if (data)
 	{
+		if (ft_find_room(farm->rooms, data[0]))
+		{
+				ft_free_tab(&data);
+				ft_error_output(farm, "Room`s name alredy exist");
+		}
 		new_room = ft_create_room(data);
 		new_room->next = farm->rooms;
 		farm->rooms = new_room;
-		if (farm->start && ft_strcmp(farm->start, START_STR) == 0)
-			farm->start = new_room->name;
-		if (farm->end && ft_strcmp(farm->end, END_STR) == 0)
-			farm->end = new_room->name;
 	}
 }
-
-

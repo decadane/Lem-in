@@ -6,13 +6,13 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 18:25:43 by ffahey            #+#    #+#             */
-/*   Updated: 2019/01/31 20:55:46 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/02 13:19:28 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-static t_room	*ft_find_room(t_room *rooms, char *name)
+t_room	*ft_find_room(t_room *rooms, char *name)
 {
 		while (rooms)
 		{
@@ -20,67 +20,98 @@ static t_room	*ft_find_room(t_room *rooms, char *name)
 				return (rooms);
 			rooms = rooms->next;
 		}
-		return (NULL);
+		return (NULL); 
 }
 
-static void		ft_link_rooms(t_room *r1, t_room *r2, size_t size)
+
+int		ft_read_room(t_farm *farm,  char *data)
 {
+	int		split_count;
+	char	**tab;
+	int		i;
+
+	if (!(tab = ft_strsplit(data, ' ')))
+		exit(OUT_OF_MEMORY);
+	split_count = 0;
+	while (tab[split_count])
+		split_count++;
+	if (split_count == 3)
+	{
+		ft_add_room(farm, tab);
+		farm->rooms_count++;
+	}
+	else
+		ft_free_tab(&tab);
+	return (split_count);
+}
+
+static int	ft_is_already_links(t_room *r1, t_room *r2)
+{
+	size_t	i;
+
+	i = 0;
+	while (r1->links[i])
+	{
+		if (r1->links[i] == r2)
+		{
+			C(1)
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+void		ft_link_rooms(t_farm *farm, char *data)
+{
+	t_room	*r1;
+	t_room	*r2;
+	char	*defis;
+
+	if (!(defis = ft_strchr(data, '-')))	//error manegment
+		ft_error_output(farm, "Wrong link room format");
+	*defis = '\0';
+	r1 = ft_find_room(farm->rooms, data);
+	r2 = ft_find_room(farm->rooms, defis + 1);
+	if (r1 == NULL || r2 == NULL)
+		ft_error_output(farm, "Room`s name doesn`t exist");
+	
 	if (r1->links == NULL)
-		r1->links = (t_room**)malloc(sizeof(t_room*) * size);
+		r1->links = (t_room**)malloc(sizeof(t_room*) * farm->rooms_count);
 	if (r2->links == NULL)
-		r2->links = (t_room**)malloc(sizeof(t_room*) * size);
-	r1->links[(r1->degree)++] = r2;
-	r1->links[(r1->degree)] = NULL;
-	r2->links[(r2->degree)++] = r1;
-	r2->links[(r2->degree)] = NULL;
+		r2->links = (t_room**)malloc(sizeof(t_room*) * farm->rooms_count);
+	if (!ft_is_already_links(r1, r2))
+	{
+		r1->links[(r1->degree)++] = r2;
+		r1->links[(r1->degree)] = NULL;
+		r2->links[(r2->degree)++] = r1;
+		r2->links[(r2->degree)] = NULL;
+	}
 }
 
 int		ft_read_rooms(t_farm *farm, char **data)
 {
-	char		**tab;
-	unsigned	size;
 	int			limit;
-	char		*defis;
-	t_room		*room1;
-	t_room		*room2;
 
 	if (farm && data)
 	{
 		limit = 3;
 		while (get_next_line(0, data))
 		{
-			if ((ft_is_modifer(*data, farm) && limit == 3) || ft_is_comment(*data))
+			if (ft_is_comment(*data))
+			{
+				ft_is_modifer(*data, farm);
 				continue ;
-			size = 0;
+			}
 			if (limit == 3)
-			{
-				if (!(tab = ft_strsplit(*data, ' ')))
-					exit(OUT_OF_MEMORY);
-				while (tab[size])
-					size++;
-			}
-			if (size == 3)
-			{
-				ft_add_room(farm, tab);
-				farm->rooms_count++;
-				continue ;
-			}
-			else if (size == 1)
-			{
-				free(tab[0]);
-				free(tab);
-				limit = 1;
-			}
+				limit = ft_read_room(farm, *data);
+			if (limit == 0)
+				ft_error_output(farm, "Empty line");
 			if (limit == 1)
-			{
-				if (!(defis = ft_strchr(*data, '-')))	//error manegment
-					return (0);
-				*defis = '\0';
-				room1 = ft_find_room(farm->rooms,*data);
-				room2 = ft_find_room(farm->rooms, defis + 1);
-				ft_link_rooms(room1, room2, farm->rooms_count); //error manegment
-			}
+				ft_link_rooms(farm, *data);
 		}
+		if (farm->start == NULL || farm->end == NULL)
+			ft_error_output(farm, "No \"start\" or \"end\" room(s)");
 	}
 	return (1);
 }

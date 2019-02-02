@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 17:28:18 by ffahey            #+#    #+#             */
-/*   Updated: 2018/11/28 13:50:21 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/02 12:31:46 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,19 @@ static size_t	ft_getsize(const char *s, char c)
 		i++;
 	}
 	return (size);
+}
+
+void			ft_free_tab(char ***tab)
+{
+	size_t	size;
+
+	size = 0;
+	while ((*tab)[size] != NULL)
+		size++;
+	while (size--)
+		free((*tab)[size]);
+	free(*tab);
+	*tab = NULL;
 }
 
 static char		**ft_filltab(char **tab, const char *s, char c, size_t size)
