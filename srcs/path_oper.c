@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 17:35:46 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/02 17:45:13 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/02 19:12:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,12 @@ void	ft_print_path(t_path *path)
 	t_path	*head;
 
 	head = path;
+	printf("Path: ");
 	while (path)
 	{
-		C(1)
-		printf("%p\n", path);
 		printf("%d ", path->room->id);
-		C(2)
 		path = path->next;
 	}
-	C(3)
 	path = head;
 }
 

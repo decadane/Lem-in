@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 16:40:28 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/02 17:31:54 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/02 18:33:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_start_mod(t_farm *farm)
 	if (ft_read_room(farm, data) != 3)
 		ft_error_output(farm, "Wrong format for read room");
 	farm->start = farm->rooms->name;
+	farm->rooms->state = START_ROOM;
 }
 
 void	ft_end_mod(t_farm *farm)
@@ -40,5 +41,6 @@ void	ft_end_mod(t_farm *farm)
 	if (ft_read_room(farm, data) != 3)
 		ft_error_output(farm, "Wrong format for read room");
 	farm->end = farm->rooms->name;
+	farm->rooms->state = END_ROOM;
 }
 
