@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memalloc.c                                      :+:      :+:    :+:   */
+/*   ft_error_output.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/24 21:36:58 by ffahey            #+#    #+#             */
-/*   Updated: 2019/01/30 20:22:56 by ffahey           ###   ########.fr       */
+/*   Created: 2019/01/31 17:28:00 by ffahey            #+#    #+#             */
+/*   Updated: 2019/02/01 12:33:01 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "lem-in.h"
 
-void	*ft_memalloc(size_t size)
+void	ft_error_output(t_farm *farm, const char *error_message)
 {
-	void	*ptr;
-
-	if (!(ptr = malloc(size)))
-		return (NULL);
-	while (size--)
-		((char*)ptr)[size] = 0;
-	return (ptr);
+	ft_putstr("ERROR\n");
+	ft_putstr(error_message);
+	ft_putchar('\n');
+	ft_farm_destroyer(farm);
+	exit(0);
 }
