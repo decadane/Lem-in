@@ -6,7 +6,7 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:56:13 by kcarrot           #+#    #+#             */
-/*   Updated: 2019/02/03 13:58:58 by kcarrot          ###   ########.fr       */
+/*   Updated: 2019/02/03 18:25:25 by kcarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,21 @@ int main()
 	t_room *r3;
 	t_room *r6;
 	t_room *r7;
+	t_path_set *a;
 
+	a = (t_path_set*)malloc(sizeof(t_path_set));
+	a->ants = (size_t*)malloc(sizeof(size_t) * 4);
+	a->lens = (size_t*)malloc(sizeof(size_t) * 4);
+	a->paths = (t_path **)malloc(sizeof(t_path*) * 4);
+	a->num_of_paths = 4;
+	
+	int i = 0;
+	while (i < 4)
+		a->ants[i++] = 0;
+	a->lens[0] = 3;
+	a->lens[1] = 4;
+	a->lens[2] = 4;
+	a->lens[3] = 2;
 	r2 = create_room("2", 0);
 	r3 = create_room("3", 0);
 	r6 = create_room("6", 0);
@@ -43,8 +57,6 @@ int main()
 	all = (t_path**)malloc(sizeof(t_path*) * 5);
 	one = (t_path*)malloc(sizeof(t_path));
 	one->room = create_room("1", -1);
-	one->ants = 0;
-	one->path_len = 3;
 	one->next = (t_path*)malloc(sizeof(t_path));
 	ptr = one->next;
 	ptr->room = r2;
@@ -59,8 +71,6 @@ int main()
 
 	two = (t_path*)malloc(sizeof(t_path));
 	two->room = create_room("1", -1);
-	two->ants = 0;
-	two->path_len = 4;
 	two->next = (t_path*)malloc(sizeof(t_path));
 	ptr = two->next;
 	ptr->room = create_room("5", 0);
@@ -77,8 +87,6 @@ int main()
 
 	three = (t_path*)malloc(sizeof(t_path));
 	three->room = create_room("1", -1);
-	three->ants = 0;
-	three->path_len = 4;
 	three->next = (t_path*)malloc(sizeof(t_path));
 	ptr = three->next;
 	ptr->room = r2;
@@ -95,8 +103,6 @@ int main()
 
 	four = (t_path*)malloc(sizeof(t_path));
 	four->room = create_room("1", -1);
-	four->ants = 0;
-	four->path_len = 2;
 	four->next = (t_path*)malloc(sizeof(t_path));
 	ptr = four->next;
 	ptr->room = r2;
@@ -156,24 +162,12 @@ int main()
 	ptr->room = create_room("4", -2);
 	ptr->next = NULL; */
 
-	all[0] = one;
-	all[1] = two;
-	all[2] = three;
-	all[3] = four;
-	all[4] = NULL;
+	(a->paths)[0] = one;
+	(a->paths)[1] = two;
+	(a->paths)[2] = three;
+	(a->paths)[3] = four;
+	(a->paths)[4] = NULL;
 
-
-	t_path_set *res;
-
-	res = (t_path_set*)malloc(sizeof(t_path_set));
-res->
-   t_path          **paths;
-     size_t          *lens;
-     size_t          *ants;
-     size_t          num_of_paths;
-}                   t_path_set;
-
-
-	find_paths(15, all);
+	find_paths(1, a);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:59:48 by kcarrot           #+#    #+#             */
-/*   Updated: 2019/02/03 14:13:59 by kcarrot          ###   ########.fr       */
+/*   Updated: 2019/02/03 18:15:22 by kcarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_ant	**create_ants(size_t num)
 	return (res);
 }
 
-void	assign_route(t_ant *ant, t_path **paths, int *assign_ants)
+void	assign_route(t_ant *ant, t_path_set *paths)
 {
 	int	i;
 	int j;
@@ -38,10 +38,10 @@ void	assign_route(t_ant *ant, t_path **paths, int *assign_ants)
 
 	i = 1;
 	res = 0;
-	min = paths[0]->path_len + paths[0]->ants;
-	while (paths[i])
+	min = (paths->lens)[0] + (paths->ants)[0];
+	while ((paths->paths)[i])
 	{
-		j = paths[i]->path_len + paths[i]->ants;
+		j = (paths->lens)[i] + (paths->ants)[i];
 		if (j < min)
 		{
 			min = j;
@@ -49,8 +49,8 @@ void	assign_route(t_ant *ant, t_path **paths, int *assign_ants)
 		}
 		i++;
 	}
-	ant->route = paths[res];
-	(paths[res])->ants += 1;
+	ant->route = (paths->paths)[res];
+	(paths->ants)[res] += 1;
 }
 
 int		finish(t_ant **ants)
@@ -91,6 +91,7 @@ void	ants_moving(t_ant **ants)
 				num++;
 			}
 			ants[i]->route->room->state = 0;
+			//
 			ants[i]->route = ants[i]->route->next;
 			ants[i]->route->room->state += (ants[i]->route->room->state < 0) ? 0 : 1;
 			print_move(ants[i]);
@@ -99,7 +100,7 @@ void	ants_moving(t_ant **ants)
 	}
 }
 
-void	move_ants(int ants_c, t_path **paths, int *assign_ants, int l)
+void	move_ants(int ants_c, t_path_set *paths)
 {
 	t_ant	**ants;
 	int		i;
@@ -108,7 +109,7 @@ void	move_ants(int ants_c, t_path **paths, int *assign_ants, int l)
 	i = 0;
 	while (i < ants_c)
 	{
-		assign_route(ants[i], paths, assign_ants);
+		assign_route(ants[i], paths);
 		i++;
 	}
 	while (!finish(ants))

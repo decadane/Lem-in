@@ -6,7 +6,7 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 19:15:38 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/03 14:11:50 by kcarrot          ###   ########.fr       */
+/*   Updated: 2019/02/03 18:15:07 by kcarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,11 @@ typedef struct		s_ant
 	t_path 	*route;
 }					t_ant;
 
+typedef struct		s_move
+{
+	int first;
+	int second;
+}					t_move;
 
 typedef struct      s_path_set
 {
@@ -75,7 +80,10 @@ t_farm				*ft_init_farm(t_farm **farm);
 
 char				**make_cross_matrix(t_path **paths, int l);
 
-void				move_ants(int ants_c, t_path **paths, int *assign_ants, int l);
+void				move_ants(int ants_c, t_path_set *paths);
+
+t_list				*move_ants_v();
+//return list of moving ants for each iteration;
 
 void				find_paths(int ants_c, t_path_set *set);
 
