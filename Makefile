@@ -6,7 +6,7 @@
 #    By: ffahey <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/29 19:04:47 by ffahey            #+#    #+#              #
-#    Updated: 2019/02/01 17:38:59 by ffahey           ###   ########.fr        #
+#    Updated: 2019/02/02 22:22:28 by ffahey           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,6 @@ $(NAME): $(BIN_PATH) $(LIB_NAME) $(OBJ)
 $(LIB_NAME):
 	make -C $(LIB_PATH)
 
-
 $(BIN_PATH):
 	mkdir -p $(BIN_PATH)
 
@@ -44,6 +43,7 @@ $(BIN_PATH)/%.o: $(SRC_PATH)/%.c $(HEAD_PATH)/lem-in.h
 	gcc $(CFLAGS) -o $@ -c $< -Iincludes -Ilibft
 
 clean:
+	@make -C libft fclean
 	rm -rf bin
 
 fclean: clean
