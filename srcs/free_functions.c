@@ -1,40 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   free_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/25 13:22:01 by ffahey            #+#    #+#             */
-/*   Updated: 2019/01/30 20:29:10 by ffahey           ###   ########.fr       */
+/*   Created: 2019/01/31 17:22:08 by ffahey            #+#    #+#             */
+/*   Updated: 2019/01/31 21:09:48 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "lem-in.h"
 
-char	*ft_itoa(int n)
+void	ft_rooms_destroyer(t_room **room)
 {
-	long int	num;
-	size_t		size;
-	char		*res;
+	t_room	*tmp;
 
-	num = n < 0 ? -(long)n : n;
-	size = n <= 0 ? 1 : 0;
-	while (num && ++size)
-		num /= 10;
-	if (!(res = ft_strnew(size)))
-		return (NULL);
-	num = n < 0 ? -(long)n : n;
-	if (num == 0)
-		*res = '0';
-	else
+	if (room && *room)
 	{
-		while (size-- && num)
+		while (*room)
 		{
-			res[size] = num % 10 + '0';
-			num /= 10;
+			tmp = (*room)->next;
+			free((*room)->name);
+			free((*room)->links);
+			free(*room);
+			*room = tmp;
 		}
-		res[size] = size ? res[size] : '-';
+		free(*room);
+		*room = NULL;
 	}
-	return (res);
+}
+
+void	ft_farm_destroyer(t_farm *farm)
+{
+	if (farm)
+	{
+		if (farm->rooms)
+			ft_rooms_destroyer(&(farm->rooms));
+		if (farm->ants)
+			free(farm->ants);
+		free(farm);
+	}
 }
