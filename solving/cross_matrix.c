@@ -6,7 +6,7 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 20:49:40 by kcarrot           #+#    #+#             */
-/*   Updated: 2019/02/03 20:52:08 by kcarrot          ###   ########.fr       */
+/*   Updated: 2019/02/04 14:03:07 by kcarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,14 @@ unsigned char			**make_cross_matrix(t_path **paths, int l) // Составляю
 			matrix[i][ii] <<= 1;
 			j++;
 		}
-		matrix[i][ii] <<= (7 - (j % 8));
+		matrix[i][ii] |= (unsigned char)1;
+		j = (7 - (j % 8));
+		while (j)
+		{
+			matrix[i][ii] <<= 1;
+			matrix[i][ii] |= (unsigned char)1;
+			j--;
+		}
 		matrix[i][ii + 1] = 0;
 		i++;
 	}

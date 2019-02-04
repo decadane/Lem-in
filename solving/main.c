@@ -6,7 +6,7 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:56:13 by kcarrot           #+#    #+#             */
-/*   Updated: 2019/02/03 18:25:25 by kcarrot          ###   ########.fr       */
+/*   Updated: 2019/02/04 14:57:39 by kcarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int main()
 	ptr->room = r2;
 	ptr->next = (t_path*)malloc(sizeof(t_path));
 	ptr = ptr->next;
-	ptr->room =  r3;
+	ptr->room = r3;
 	ptr->next = (t_path*)malloc(sizeof(t_path));
 	ptr = ptr->next;
 	ptr->room = create_room("4", -2);
@@ -168,6 +168,9 @@ int main()
 	(a->paths)[3] = four;
 	(a->paths)[4] = NULL;
 
-	find_paths(1, a);
+
+printf("-------%s--------\n", ((a->paths)[3])->next->room->name);
+
+	find_paths(20, a);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:59:48 by kcarrot           #+#    #+#             */
-/*   Updated: 2019/02/03 18:15:22 by kcarrot          ###   ########.fr       */
+/*   Updated: 2019/02/04 14:55:42 by kcarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void	assign_route(t_ant *ant, t_path_set *paths)
 		i++;
 	}
 	ant->route = (paths->paths)[res];
-	(paths->ants)[res] += 1;
+	if ((paths->paths)[res]->next->room->state != -2)
+		(paths->ants)[res] += 1;
 }
 
 int		finish(t_ant **ants)
@@ -73,6 +74,7 @@ void	print_move(t_ant *ant)
 	ft_putnbr(ant->id);
 	ft_putchar('-');
 	ft_putstr(ant->route->room->name);
+//	printf("\n-------%s--------\n", ant->route->room->name);
 	ft_putchar(' ');
 }
 
