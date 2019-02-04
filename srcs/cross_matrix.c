@@ -6,7 +6,7 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 20:49:40 by kcarrot           #+#    #+#             */
-/*   Updated: 2019/02/04 17:23:50 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/04 17:47:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int		check_cross(t_path **paths, unsigned char **matrix, int i, int j)
 		r1 = paths[i];
 		while (r1)
 		{
-			if (r1->room == r2->room)
+			if (r1->room == r2->room && r1->room->state >= 0)
 				return (1);
 			r1 = r1->next;
 		}
