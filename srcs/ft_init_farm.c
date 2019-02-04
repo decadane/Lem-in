@@ -6,19 +6,58 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 17:10:03 by ffahey            #+#    #+#             */
-/*   Updated: 2019/01/30 17:35:39 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/02 13:07:59 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-t_farm		*ft_init_farm(t_farm **farm)
+static void		ft_read_ants_count(t_farm *farm, char **data)
+{
+	size_t	i;
+
+	while (get_next_line(0, data) == 1)
+	{
+		if (ft_is_comment(*data))
+		{
+			ft_memdel((void**)data);
+			continue ;
+		}
+		break;
+	}
+	if (*data == NULL)
+		ft_error_output(farm, "No input data");
+	i = 0;
+	while ((*data)[i])
+	{
+		if (!(ft_isdigit((*data)[i])))
+			ft_error_output(farm, "Wrong format for ants count");
+		i++;
+	}
+	farm->ants_count = (size_t)ft_atoi(*data);
+	if (farm->ants_count > INT_MAX)
+		ft_error_output(farm, "Integer owerflow");
+	ft_ants_generator(farm);
+}
+
+int				ft_is_comment(char	*input_data)
+{
+	if (input_data)
+	{
+		if (input_data[0] == '#')
+				return (1);
+	}
+	return (0);
+}
+
+t_farm			*ft_init_farm()
 {
 	char	*input_data;
-
-	while (get_next_line(0, &input_data))
-	{
-		printf("\t%s\n", input_data);
-	}
-	return (NULL);
+	t_farm	*farm;
+	
+	input_data = NULL;
+	farm = ft_create_farm();
+	ft_read_ants_count(farm, &input_data);
+	ft_read_rooms(farm, &input_data);
+	return (farm);
 }

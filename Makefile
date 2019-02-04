@@ -3,49 +3,49 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ffahey <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: marvin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/29 19:04:47 by ffahey            #+#    #+#              #
-#    Updated: 2019/01/30 17:28:00 by ffahey           ###   ########.fr        #
+#    Updated: 2019/02/02 17:27:14 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC_PATH=srcs
-HEAD_PATH=includes
-BIN_PATH=bin
-LIB_PATH=libft
+NAME = lem-in
 
-LIB_INC:=-L$(LIB_PATH) -lft
+vpath %.c srcs
+vpath %.h includes
+vpath %.o bin
 
-CFLAGS=#-Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 
-NAME=lem-in
-LIB_NAME=libft.a
+OBJ = $(addprefix bin/,$(notdir $(patsubst %.c,%.o,$(wildcard srcs/*.c))))
 
-SRC=lem-in.c ft_init_farm.c
-OBJ=$(addprefix $(BIN_PATH)/,$(SRC:.c=.o))
+HEADERS = $(wildcard includes/*.h)
 
-.PHONY: all clean fclean re
+LIB = libft/libft.a
 
-all: $(NAME)
+all: makedir make_lib $(NAME)
 
-$(NAME): $(BIN_PATH) $(LIB_NAME) $(OBJ)
-	gcc -o $@ $(OBJ) $(LIB_INC)
+makedir:
+	@mkdir -p bin
 
-$(LIB_NAME):
-	make -C $(LIB_PATH)
+make_lib:
+	make -C libft/
 
+$(NAME): $(OBJ) $(LIB)
+	gcc $(FLAGS) $^ -o $@ -Iincludes -Ilibft -Llibft -lft
 
-$(BIN_PATH):
-	mkdir -p $(BIN_PATH)
-
-$(BIN_PATH)/%.o: $(SRC_PATH)/%.c $(HEAD_PATH)/lem-in.h
-	gcc $(CFLAGS) -o $@ -c $< -Iincludes -Ilibft
+bin/%.o: %.c $(HEADERS)
+	gcc $(FLAGS) -c $< -o $@ -Iincludes -Ilibft
 
 clean:
-	rm -rf bin
+	rm -rf bin/
+	rm -rf libft/bin
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f $(LIB)
 
 re: fclean all
+
+.PHONY: all clean fclean re make_lib

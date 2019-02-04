@@ -6,13 +6,13 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/24 20:00:36 by ffahey            #+#    #+#             */
-/*   Updated: 2019/01/27 20:57:29 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/01 13:58:49 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-long	ft_atoi(const char *str)
+int		ft_atoi(const char *str)
 {
 	long int	res;
 	long int	check;
@@ -36,5 +36,5 @@ long	ft_atoi(const char *str)
 			return (sign < 0 ? 0 : -1);
 		str++;
 	}
-	return ((res * sign));
+	return ((int)(res * sign));
 }
