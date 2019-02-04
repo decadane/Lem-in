@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:52:17 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/02 19:21:02 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/04 17:35:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void			ft_bfs(t_path *path, t_ps **ps, t_room *room, size_t ac)
 	int		i;
 
 	i = -1;
-	if (!ft_check_path(path, room->id) || ft_path_len(path) > ac)
+	if (!ft_check_path(path, room->id))
 	{
 		ft_path_destroyer(path);
 		return ;

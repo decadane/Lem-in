@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 19:20:07 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/02 20:45:40 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/04 17:36:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int		main()
 	printf("Ants count: %lu\n", farm->ants_count);
 //	solution = ft_ants_power(farm);
 */	
+	find_paths(farm->ants_count, set);
 	ft_farm_destroyer(farm);
 	return (0);
 }

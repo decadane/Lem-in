@@ -6,7 +6,7 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 20:49:40 by kcarrot           #+#    #+#             */
-/*   Updated: 2019/02/04 15:07:22 by kcarrot          ###   ########.fr       */
+/*   Updated: 2019/02/04 18:05:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 {
 	int i;
 	int j;
-	int k;
 
 	i = 0;
 	while (cross_m[i])
@@ -42,7 +41,6 @@
 
 static int		check_cross(t_path **paths, unsigned char **matrix, int i, int j)
 {
-	int res;
 	t_path *r1;
 	t_path *r2;
 
@@ -56,7 +54,7 @@ static int		check_cross(t_path **paths, unsigned char **matrix, int i, int j)
 		r1 = paths[i];
 		while (r1)
 		{
-			if (r1->room == r2->room)
+			if (r1->room == r2->room && r1->room->state >= 0)
 				return (1);
 			r1 = r1->next;
 		}
@@ -73,12 +71,12 @@ unsigned char			**make_cross_matrix(t_path **paths, int l) // Составляю
 	unsigned char	**matrix;
 
 	i = 0;
-	matrix = (unsigned char**)malloc(sizeof(unsigned char*) * l + 1);
+	matrix = (unsigned char**)malloc(sizeof(unsigned char*) * (l + 1));
 	while (i < l)
 	{
 		j = 0;
 		ii = -1;
-		matrix[i] = (unsigned char*)malloc(sizeof(unsigned char) * (l / 8) + (l % 8) ? 1 : 0 + 1);
+		matrix[i] = (unsigned char*)malloc(sizeof(unsigned char) * (l / 8) + (l % 8) ? 2 : 1);
 		while (j < l)
 		{
 			if (!(j % 8))
