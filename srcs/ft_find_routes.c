@@ -6,17 +6,17 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 16:16:33 by kcarrot           #+#    #+#             */
-/*   Updated: 2019/02/04 14:51:49 by kcarrot          ###   ########.fr       */
+/*   Updated: 2019/02/04 17:23:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
-
+/*
 int one_path(size_t *path_len)
 {
-	int i;
-	int ind;
-	int min;
+	int		i;
+	int		ind;
+	size_t	min;
 
 	min = path_len[0];
 	ind = 0;
@@ -32,7 +32,7 @@ int one_path(size_t *path_len)
 	}
 	return(ind);
 }
-
+*/
 
 int		total_path_len(int *i, int ants, size_t *path_len)
 {
@@ -59,7 +59,6 @@ int     no_crosses(unsigned char **cross_m, int *res, int j, int mv)
 	ii = 0;
 	while (res[ii] != -1)
 	{
-	//	ft_putnbr((int)cross_m[res[ii]][j]);
 		if (cross_m[res[ii]][j] >> mv & 1)
 			return (0);
 		ii++;
@@ -73,7 +72,6 @@ int		*recursion(t_path_set *set, int *res, unsigned char **cross_m, int ants, in
 	int ii;
 	int mv;
 	int *res2;
-	int min_len;
 	
 	i = 0;
 	while (res[i] != -1)
@@ -91,13 +89,6 @@ int		*recursion(t_path_set *set, int *res, unsigned char **cross_m, int ants, in
 		{
 			if (no_crosses(cross_m, res, n, mv))
 			{
-				//ii = 0;
-				//while (res[ii] != -1)
-				//	ii++;
-				//res2 = (int*)malloc(ii + 2);
-				//ft_memcpy(res2, res, 4 * ii);
-				//res2[ii] = i * 8 + (7 - mv);
-				//res2[ii + 1] = -1;
 				ii = n * 8 + (7 - mv);
 				//printf("\nthis is ii: %d\n", ii);
 				res2 = recursion(set, res, cross_m, ants, ii);
@@ -117,12 +108,12 @@ int		*recursion(t_path_set *set, int *res, unsigned char **cross_m, int ants, in
 
 int		*check_path_len(unsigned char **cross_m, t_path_set *set, int i, int ants)
 {
-	int	*res;
-	int	j;
+	int				*res;
+	unsigned long	j;
 
 	j = 0;
-	res = (int*)malloc(sizeof(int) * set->num_of_paths + 1);
-	while (j < set->num_of_paths + 1)
+	res = (int*)malloc(sizeof(int) * (set->num_of_paths + 1));
+	while (j <= set->num_of_paths)
 		res[j++] = -1;
 	res[0] = i;
 	res = recursion(set, res, cross_m, ants, -1);
@@ -133,22 +124,22 @@ int		*check_path_len(unsigned char **cross_m, t_path_set *set, int i, int ants)
 int		*find_best_path(size_t ants, t_path_set *set, unsigned char **cross_m) // Ищу лучшее решение: либо 1 самый короткий путь, либо комбинация из 2х и больше непересекающихся путей.
 {
 	int		min;
-	int		ind;
+//	int		ind;
 	int		*res;
 	int		*res2;
-	int		i;
+	size_t	i;
 
 	i = 0;
-	ind = one_path(set->lens); // находим один путь с минимальным кол-вом шагов
-	min = (set->lens)[ind] + ants - 1; //узнаем, за сколько ходов мы прогоним всех муравьев по одному самому короткому пути
+//	ind = one_path(set->lens); // находим один путь с минимальным кол-вом шагов
+	min = (set->lens)[0] + ants - 1; //узнаем, за сколько ходов мы прогоним всех муравьев по одному самому короткому пути
 
 	//write(1, "2", 1);
 	res = (int*)malloc(sizeof(int) * 2);
-	res[0] = ind;
+	res[0] = 0;
 	res[1] = -1;
 	i = 0;
 	//write(1, "3", 1);
-	while ((set->paths)[i])
+	while (i < set->num_of_paths)
 	{
 		//write(1, "4", 1);
 		res2 = check_path_len(cross_m, set, i, ants); // проверяем кол-во ходов, если использовать несколько непересекающихся путям

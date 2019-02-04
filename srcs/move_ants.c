@@ -6,7 +6,7 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:59:48 by kcarrot           #+#    #+#             */
-/*   Updated: 2019/02/04 15:07:02 by kcarrot          ###   ########.fr       */
+/*   Updated: 2019/02/04 17:29:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 t_ant	**create_ants(size_t num)
 {
 	t_ant	**res;
-	int		i;
+	size_t	i;
 
 	i = 1;
-	res = (t_ant**)malloc(sizeof(t_ant*) * num + 1);
+	res = (t_ant**)malloc(sizeof(t_ant*) * (num + 1));
 	while (i <= num)
 	{
 		res[i - 1] = (t_ant*)malloc(sizeof(t_ant));
@@ -31,15 +31,15 @@ t_ant	**create_ants(size_t num)
 
 void	assign_route(t_ant *ant, t_path_set *paths)
 {
-	int	i;
-	int j;
-	int min;
-	int res;
+	size_t	i;
+	int		j;
+	int		min;
+	int		res;
 
 	i = 1;
 	res = 0;
 	min = (paths->lens)[0] + (paths->ants)[0];
-	while ((paths->paths)[i])
+	while (i < paths->num_of_paths)
 	{
 		j = (paths->lens)[i] + (paths->ants)[i];
 		if (j < min)

@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 19:15:38 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/02 20:45:35 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/04 15:15:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,18 @@ typedef struct		s_path
 	struct s_path	*next;
 }					t_path;
 
+typedef struct		s_ant
+{
+	int				id;
+	t_path			*route;
+}					t_ant;
+
+typedef struct		s_move
+{
+	int				first;
+	int				second;
+}					t_move;
+
 typedef struct			s_path_list
 {
 	t_path				*path;
@@ -129,5 +141,14 @@ void				ft_path_destroyer(t_path *path);
 
 size_t				ft_path_len(t_path *path);
 size_t				ft_num_paths(t_ps *ps);
+
+//kcarrot part
+
+unsigned char		**make_cross_matrix(t_path **paths, int l);
+void				move_ants(int ants_c, t_path_set *paths);
+t_list				*move_ants_v();
+//return list of moving ants for each iteration;
+void				find_paths(int ants_c, t_path_set *set);
+static int num = 1; // Для итоговой нумерации муравьев
 
 #endif
