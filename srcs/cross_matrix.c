@@ -6,48 +6,69 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 20:49:40 by kcarrot           #+#    #+#             */
-/*   Updated: 2019/02/04 18:05:48 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/04 20:12:10 by kcarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
- void print_matrix(unsigned char **cross_m)
+
+void	print_bits(unsigned char octet)
+{
+	int				x;
+	char			res[8];
+
+	x = 8;
+	while (x--)
+	{
+		res[x] = (octet % 2) ? '1' : '0';
+		octet = octet / 2;
+	}
+	write(1, res, 8);
+}
+
+
+
+ void print_matrix(unsigned char **cross_m, int l)
 {
 	int i;
 	int j;
-
+	int len;
+	
+	len = l / 8;
+	len += (l % 8) ? 1 : 0;
+	ft_putnbr(l);
+	ft_putstr("\n\n");
+	
+	ft_putnbr(len);
+	ft_putstr("\n\n");
 	i = 0;
-	while (cross_m[i])
+	while (i < l)
 	{
 		j = 0;
-		while (cross_m[i][j])
+		while (j < len)
 		{
-			//k = 8;
-			//while (--k)
-			//{
-				//printf("%d", cross_m[i][j] & (1 << k));
-				//ft_putnbr(cross_m[i][j] & ((unsigned char)1 << k));
-				//cross_m[i][j] <<= 1;
-			//}
-			ft_putnbr((int)cross_m[i][j]);
-			ft_putchar('\n');
+			print_bits(cross_m[i][j]);
+			//ft_putnbr((int)cross_m[i][j]);
+			ft_putchar(' ');
 			j++;
 		}
 		i++;
-		ft_putchar('\n');
+		ft_putstr("\n\n");
 	}
 }
 
-static int		check_cross(t_path **paths, unsigned char **matrix, int i, int j)
+static unsigned char		check_cross(t_path **paths, unsigned char **matrix, int i, int j)
 {
 	t_path *r1;
 	t_path *r2;
 
 	if (i == j)
 		return (1);
-	if (i > j)
-		return (1 & (matrix[j][i / 8] >> (7 - i % 8)));
+	if (matrix)
+		r2 = 0;
+	//if (i > j)
+	//	return (matrix[j][i / 8] & ((unsigned char)1 << (7 - i % 7)));
 	r2 = paths[j];
 	while (r2)
 	{
@@ -65,37 +86,38 @@ static int		check_cross(t_path **paths, unsigned char **matrix, int i, int j)
 
 unsigned char			**make_cross_matrix(t_path **paths, int l) // Составляю матрицу пересечений путей. 1 - есть пересечение между двумя путями, 0 - нет.
 {
-	int				i;
-	int				ii;
+	int				rows;
+	int				chars;
 	int				j;
 	unsigned char	**matrix;
+	unsigned char	check_c;
 
-	i = 0;
+	rows = 0;
 	matrix = (unsigned char**)malloc(sizeof(unsigned char*) * (l + 1));
-	while (i < l)
+	while (rows < l)
 	{
 		j = 0;
-		ii = -1;
-		matrix[i] = (unsigned char*)malloc(sizeof(unsigned char) * (l / 8) + (l % 8) ? 2 : 1);
+		chars = 0;
+		matrix[rows] = (unsigned char*)malloc(sizeof(unsigned char) * ((l / 8) + (l % 8) ? 2 : 1));
+		matrix[rows][chars] = 0;
 		while (j < l)
 		{
-			if (!(j % 8))
-				ii++;
-			matrix[i][ii] |= check_cross(paths, matrix, i, j);
-			matrix[i][ii] <<= 1;
+			if (j && !(j % 8))
+				chars++;
+			check_c = check_cross(paths, matrix, rows, j);
+			check_c <<= (7 - j % 8);
+			matrix[rows][chars] |= check_c;
 			j++;
 		}
-		matrix[i][ii] |= (unsigned char)1;
-		j = (7 - (j % 8));
-		while (j)
+		j = j % 8;
+		while (j < 7)
 		{
-			matrix[i][ii] <<= 1;
-			matrix[i][ii] |= (unsigned char)1;
-			j--;
+			matrix[rows][chars] |= (unsigned char)255 >> j;
+			j++;
 		}
-		matrix[i][ii + 1] = 0;
-		i++;
+		matrix[rows][chars + 1] = 0;
+		rows++;
 	}
-	matrix[i] = NULL;
+	matrix[rows] = NULL;
 	return (matrix);
 }

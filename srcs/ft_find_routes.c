@@ -6,7 +6,7 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 16:16:33 by kcarrot           #+#    #+#             */
-/*   Updated: 2019/02/04 18:06:51 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/04 20:14:28 by kcarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int		*recursion(t_path_set *set, int *res, unsigned char **cross_m, int ants, in
 	int mv;
 	int *res2;
 	
+	//write(1, "4\n", 2);
 	i = 0;
 	while (res[i] != -1)
 		i++;
@@ -115,6 +116,7 @@ int		*check_path_len(unsigned char **cross_m, t_path_set *set, int i, int ants)
 	res = (int*)malloc(sizeof(int) * (set->num_of_paths + 1));
 	while (j <= set->num_of_paths)
 		res[j++] = -1;
+	//write(1, "3\n", 2);
 	res[0] = i;
 	res = recursion(set, res, cross_m, ants, -1);
 	return (res);
@@ -141,9 +143,9 @@ int		*find_best_path(size_t ants, t_path_set *set, unsigned char **cross_m) // �
 	//write(1, "3", 1);
 	while (i < set->num_of_paths)
 	{
-		//write(1, "4", 1);
+	//	write(1, "2\n", 2);
 		res2 = check_path_len(cross_m, set, i, ants); // проверяем кол-во ходов, если использовать несколько непересекающихся путям
-	
+	//	write(1, "3\n", 2);
 	
 	//	int k = 0;
 		//while (res2[k] != -1)
@@ -178,9 +180,9 @@ void	find_paths(int ants_c, t_path_set *set) // Получаю все возмо
 	int					j;
 
 	cross_m = make_cross_matrix(set->paths, set->num_of_paths); // Матрица пересечений между всеми путями
-	//write(1, "1", 1);
+	//write(1, "1\n", 1);
 	best = find_best_path(ants_c, set, cross_m); // Получаю массив путей, которые буду использовать
-	//write(1, "10", 2);
+	//write(1, "2\n", 2);
 	i = 0;
 	while (best[i] != -1)
 	{
