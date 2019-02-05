@@ -6,33 +6,11 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 16:16:33 by kcarrot           #+#    #+#             */
-/*   Updated: 2019/02/04 20:14:28 by kcarrot          ###   ########.fr       */
+/*   Updated: 2019/02/04 20:32:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
-/*
-int one_path(size_t *path_len)
-{
-	int		i;
-	int		ind;
-	size_t	min;
-
-	min = path_len[0];
-	ind = 0;
-	i = 1;
-	while (path_len[i])
-	{
-		if (path_len[i] < min)
-		{
-			min = path_len[i];
-			ind = i;
-		}
-		i++;
-	}
-	return(ind);
-}
-*/
 
 int		total_path_len(int *i, int ants, size_t *path_len)
 {

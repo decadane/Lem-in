@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 17:35:46 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/02 19:12:28 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/05 13:46:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,4 +164,24 @@ size_t	ft_path_len(t_path *path)
 	}
 	path = head;
 	return (len);
+}
+//delete this func!
+void	ft_print_farm(t_farm *farm)
+{
+	int		i;
+	int		j;
+	t_room	*tmp;
+
+	i = -1;
+	tmp = farm->rooms;
+	while (++i < (int)farm->rooms_count)
+	{
+		printf("Degree: %d, ID: %d, State: %d", farm->rooms->degree, farm->rooms->id, farm->rooms->state);
+		j = -1;
+		while (++j < farm->rooms->degree)
+			printf(" Ptr: %d", farm->rooms->links[j]->id);
+		printf("\n");
+		farm->rooms = farm->rooms->next;
+	}
+	farm->rooms = tmp;
 }

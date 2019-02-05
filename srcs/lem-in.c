@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 19:20:07 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/04 17:36:36 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/04 20:35:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ int		main()
 	farm = NULL;
 	i = 0;
 	farm = ft_init_farm();
-	ft_print_farm(farm);
+//	ft_print_farm(farm);
 	set = ft_start_bfs(farm);
-	while (i < (int)set->num_of_paths)
+/*	while (i < (int)set->num_of_paths)
 	{
 		ft_print_path(set->paths[i]);
 		printf(", Len: %zu, Ants: %zu\n", set->lens[i], set->ants[i]);
 		i++;
 	}
-/*	t_room	*tmp = farm->rooms;
+	t_room	*tmp = farm->rooms;
 	while (tmp)
 	{
 		printf("%s: ", tmp->name);
