@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 17:18:10 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/05 18:12:20 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/05 19:41:12 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ t_room		*ft_create_room(t_farm *farm, char **tab)
 void		ft_add_room(t_farm *farm, char **data)
 {
 	t_room		*new_room;
-	t_room		*rooms;
 
 	if (farm && data)
 	{

@@ -6,7 +6,7 @@
 #    By: marvin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/29 19:04:47 by ffahey            #+#    #+#              #
-#    Updated: 2019/02/05 18:05:03 by ffahey           ###   ########.fr        #
+#    Updated: 2019/02/05 19:39:52 by ffahey           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ vpath %.c srcs
 vpath %.h includes
 vpath %.o bin
 
+<<<<<<< HEAD
 FLAGS = -Wall -Wextra -Werror
 
 OBJ = $(addprefix bin/,$(notdir $(patsubst %.c,%.o,$(wildcard srcs/*.c))))

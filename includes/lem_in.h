@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 19:15:38 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/05 18:07:05 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/05 19:40:42 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,15 @@ typedef struct		s_path_set
 
 //------------------------ffahey part----------------------------
 
-void			ft_start_mod(t_farm *farm, char *command);
-void			ft_end_mod(t_farm *farm, char *command);
-void			ft_restart_mod(t_farm *farm, char *command);
-void			ft_reend_mod(t_farm *farm, char *command);
-void			ft_rename_mod(t_farm *farm, char *command);
-void			ft_edit_mod(t_farm *farm, char *command);
-void			ft_delete_mod(t_farm *farm, char *command);
+typedef void	(*t_modifer_function)(t_farm *farm);
+
+void			ft_start_mod(t_farm *farm);
+void			ft_end_mod(t_farm *farm);
+void			ft_restart_mod(t_farm *farm);
+void			ft_reend_mod(t_farm *farm);
+void			ft_rename_mod(t_farm *farm);
+void			ft_edit_mod(t_farm *farm);
+void			ft_delete_mod(t_farm *farm);
 
 typedef void	(*t_modifer_function)(t_farm *farm);
 
