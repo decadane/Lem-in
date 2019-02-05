@@ -6,11 +6,11 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 17:10:03 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/02 13:07:59 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/05 17:43:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 static void		ft_read_ants_count(t_farm *farm, char **data)
 {

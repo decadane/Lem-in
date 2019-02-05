@@ -6,12 +6,11 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 20:49:40 by kcarrot           #+#    #+#             */
-/*   Updated: 2019/02/04 20:12:10 by kcarrot          ###   ########.fr       */
+/*   Updated: 2019/02/05 17:42:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
-
+#include "lem_in.h"
 
 void	print_bits(unsigned char octet)
 {

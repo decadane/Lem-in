@@ -6,11 +6,11 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:09:35 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/02 17:35:36 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/05 17:44:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 static void		ft_init_modifer_string(char **mod_str)
 {

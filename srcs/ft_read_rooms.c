@@ -6,11 +6,11 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 18:25:43 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/02 17:29:27 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/05 17:43:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 t_room	*ft_find_room(t_room *rooms, char *name)
 {

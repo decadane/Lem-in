@@ -6,11 +6,11 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 12:59:48 by kcarrot           #+#    #+#             */
-/*   Updated: 2019/02/04 17:29:54 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/05 17:44:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 t_ant	**create_ants(size_t num)
 {
