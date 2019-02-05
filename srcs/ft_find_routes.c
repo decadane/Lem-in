@@ -6,7 +6,7 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 16:16:33 by kcarrot           #+#    #+#             */
-/*   Updated: 2019/02/04 20:32:37 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/05 13:51:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,12 +126,12 @@ int		*find_best_path(size_t ants, t_path_set *set, unsigned char **cross_m) // Ð
 	//	write(1, "3\n", 2);
 	
 	//	int k = 0;
-		//while (res2[k] != -1)
+	//	while (res2[k] != -1)
 	//	printf("LOOK:  %d  \n", res2[k++]);
 	
 	
-	//printf("\nTHIS IS MIN: %d\n", min);
-	//printf("\nTHIS IS NEW_PATH_LEN: %d\n", total_path_len(res2, ants, set->lens));
+	//printf("\nTHIS IS MIN: %d", min);
+//	printf("\nTHIS IS NEW_PATH_LEN: %d\n", total_path_len(res2, ants, set->lens));
 		if (total_path_len(res2, ants, set->lens) < min)
 		{
 			//write(1, "YES\n", 4);
