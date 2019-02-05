@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_rooms_reverse.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/25 13:22:01 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/05 16:00:30 by ffahey           ###   ########.fr       */
+/*   Created: 2019/02/05 14:36:25 by ffahey            #+#    #+#             */
+/*   Updated: 2019/02/05 17:44:06 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "lem_in.h"
 
-char	*ft_itoa(int n)
+void	ft_rooms_reverse(t_room **rooms)
 {
-	long int	num;
-	size_t		size;
-	char		*res;
+	t_room	*prev;
+	t_room	*current;
+	t_room	*next;
 
-	num = n < 0 ? -(long)n : n;
-	size = n <= 0 ? 1 : 0;
-	while (num && ++size)
-		num /= 10;
-	if (!(res = ft_strnew(size)))
-		return (NULL);
-	num = n < 0 ? -(long)n : n;
-	if (num == 0)
-		*res = '0';
-	else
+	if (rooms && *rooms)
 	{
-		while (size-- && num)
+		prev = NULL;
+		current = *rooms;
+		next = NULL;
+		while (current != NULL)
 		{
-			res[size] = num % 10 + '0';
-			num /= 10;
+			next = current->next;
+			current->next = prev;
+			prev = current;
+			current = next;
 		}
-		size == 0 ? res[size] = '-' : 0;
+		*rooms = prev;
 	}
-	return (res);
 }

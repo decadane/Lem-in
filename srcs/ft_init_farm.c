@@ -6,11 +6,11 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 17:10:03 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/02 13:07:59 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/05 17:43:33 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 static void		ft_read_ants_count(t_farm *farm, char **data)
 {
@@ -23,7 +23,7 @@ static void		ft_read_ants_count(t_farm *farm, char **data)
 			ft_memdel((void**)data);
 			continue ;
 		}
-		break;
+		break ;
 	}
 	if (*data == NULL)
 		ft_error_output(farm, "No input data");
@@ -38,26 +38,28 @@ static void		ft_read_ants_count(t_farm *farm, char **data)
 	if (farm->ants_count > INT_MAX)
 		ft_error_output(farm, "Integer owerflow");
 	ft_ants_generator(farm);
+	free(*data);
 }
 
-int				ft_is_comment(char	*input_data)
+int				ft_is_comment(char *input_data)
 {
 	if (input_data)
 	{
 		if (input_data[0] == '#')
-				return (1);
+			return (1);
 	}
 	return (0);
 }
 
-t_farm			*ft_init_farm()
+t_farm			*ft_init_farm(void)
 {
-	char	*input_data;
 	t_farm	*farm;
-	
+	char	*input_data;
+
 	input_data = NULL;
 	farm = ft_create_farm();
 	ft_read_ants_count(farm, &input_data);
 	ft_read_rooms(farm, &input_data);
+	ft_rooms_reverse(&farm->rooms);
 	return (farm);
 }

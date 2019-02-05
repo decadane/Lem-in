@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 16:38:21 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/02 12:32:19 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/05 17:50:48 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,10 @@ int					ft_isdigit(int c);
 int					ft_isalnum(int c);
 int					ft_isascii(int	c);
 int					ft_isprint(int c);
+int					ft_is_str_integer(char *str);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
-int				ft_atoi(const char *str);
+int					ft_atoi(const char *str);
 char				**ft_strsplit(const char *str, char c);
 
 /*
