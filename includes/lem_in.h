@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 17:42:25 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/05 17:42:28 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/05 19:34:15 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,15 @@ typedef struct		s_farm
 	char			**ants;
 }					t_farm;
 
-typedef void	(*t_modifer_function)(t_farm *farm, char *command);
+typedef void	(*t_modifer_function)(t_farm *farm);
 
-void			ft_start_mod(t_farm *farm, char *command);
-void			ft_end_mod(t_farm *farm, char *command);
-void			ft_restart_mod(t_farm *farm, char *command);
-void			ft_reend_mod(t_farm *farm, char *command);
-void			ft_rename_mod(t_farm *farm, char *command);
-void			ft_edit_mod(t_farm *farm, char *command);
-void			ft_delete_mod(t_farm *farm, char *command);
+void			ft_start_mod(t_farm *farm);
+void			ft_end_mod(t_farm *farm);
+void			ft_restart_mod(t_farm *farm);
+void			ft_reend_mod(t_farm *farm);
+void			ft_rename_mod(t_farm *farm);
+void			ft_edit_mod(t_farm *farm);
+void			ft_delete_mod(t_farm *farm);
 
 //------------------------ffahey part----------------------------
 

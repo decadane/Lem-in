@@ -6,7 +6,7 @@
 #    By: ffahey <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/29 19:04:47 by ffahey            #+#    #+#              #
-#    Updated: 2019/02/05 17:48:39 by ffahey           ###   ########.fr        #
+#    Updated: 2019/02/05 19:29:50 by ffahey           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LIB_PATH=libft
 
 LIB_INC:=-L$(LIB_PATH) -lft
 
-CFLAGS=#-Wall -Wextra -Werror
+CFLAGS=-Wall -Wextra -Werror
 
 NAME=lem-in
 LIB_NAME=libft.a

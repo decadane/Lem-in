@@ -6,13 +6,13 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 16:40:28 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/05 17:44:27 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/05 19:32:22 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	ft_start_mod(t_farm *farm, char *mod)
+void	ft_start_mod(t_farm *farm)
 {
 	char	*data;
 
@@ -28,7 +28,7 @@ void	ft_start_mod(t_farm *farm, char *mod)
 	free(data);
 }
 
-void	ft_end_mod(t_farm *farm, char *mod)
+void	ft_end_mod(t_farm *farm)
 {
 	char	*data;
 
@@ -44,7 +44,7 @@ void	ft_end_mod(t_farm *farm, char *mod)
 	free(data);
 }
 
-void	ft_restart_mod(t_farm *farm, char *mod)
+void	ft_restart_mod(t_farm *farm)
 {
 	char	*data;
 
@@ -58,7 +58,7 @@ void	ft_restart_mod(t_farm *farm, char *mod)
 	free(data);
 }
 
-void	ft_reend_mod(t_farm *farm, char *mod)
+void	ft_reend_mod(t_farm *farm)
 {
 	char	*data;
 

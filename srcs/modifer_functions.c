@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:09:35 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/05 17:44:42 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/05 19:35:48 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void		ft_init_modifer_functions(t_modifer_function *mod_func)
 	mod_func[MODIFER_COUNT] = NULL;
 }
 
-static int		ft_find_index(t_farm *farm, char *mod, char **mod_str)
+static int		ft_find_index(char *mod, char **mod_str)
 {
 	int		i;
 
@@ -60,10 +60,10 @@ int				ft_is_modifer(char *mod, t_farm *farm)
 		ft_init_modifer_string(mod_str);
 	if (*mod_func == NULL)
 		ft_init_modifer_functions(mod_func);
-	mod_index = ft_find_index(farm, mod, mod_str);
+	mod_index = ft_find_index(mod, mod_str);
 	if (mod_index < 0)
 		return (0);
 	else
-		mod_func[mod_index](farm, mod);
+		mod_func[mod_index](farm);
 	return (1);
 }

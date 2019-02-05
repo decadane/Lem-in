@@ -6,13 +6,13 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 17:40:05 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/05 17:40:20 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/05 19:36:16 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	ft_rename_mod(t_farm *farm, char *mod)
+void	ft_rename_mod(t_farm *farm)
 {
 	char	*data;
 	char	**names;
@@ -41,7 +41,7 @@ void	ft_rename_mod(t_farm *farm, char *mod)
 	free(data);
 }
 
-void	ft_edit_mod(t_farm *farm, char *mod)
+void	ft_edit_mod(t_farm *farm)
 {
 	char	*data;
 	size_t	size;
@@ -68,11 +68,10 @@ void	ft_edit_mod(t_farm *farm, char *mod)
 	free(data);
 }
 
-void	ft_delete_mod(t_farm *farm, char *mod)
+void	ft_delete_mod(t_farm *farm)
 {
 	char	*data;
 	t_room	*room;
-	t_room	*prev;
 
 	get_next_line(0, &data);
 	if (ft_is_comment(data))

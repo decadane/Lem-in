@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 18:25:43 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/05 17:43:52 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/05 19:31:21 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int			ft_read_room(t_farm *farm, char *data)
 {
 	int		split_count;
 	char	**tab;
-	int		i;
 
 	if (!(tab = ft_strsplit(data, ' ')))
 		exit(OUT_OF_MEMORY);
