@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:52:17 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/04 17:35:28 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/05 14:00:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,11 @@ static t_path_set	*ft_convert_to_arr(t_ps *ps)
 	tmp = ps;
 	set = (t_path_set*)malloc(sizeof(t_path_set));
 	set->num_of_paths  = ft_num_paths(ps);
+	if (set->num_of_paths == 0)
+	{
+		free(set);
+		return (NULL);
+	}
 	set->paths = (t_path**)malloc(sizeof(t_path*) * set->num_of_paths);
 	set->lens = (size_t*)malloc(sizeof(size_t) * set->num_of_paths);
 	set->ants = (size_t*)malloc(sizeof(size_t) * set->num_of_paths);
