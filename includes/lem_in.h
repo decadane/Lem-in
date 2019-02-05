@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 19:15:38 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/05 17:42:14 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/05 18:07:05 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@
 # define END_ROOM			-2
 # define START			"##start"
 # define END			"##end"
-//# define RESTART		"#restart"
-//# define REEND			"#reend"
-//# define RENAME			"#rename"
-//# define EDIT			"#edit"
-//# define DELETE			"#delete"
-# define MODIFER_COUNT	2
+# define RESTART		"##restart"
+# define REEND			"##reend"
+# define RENAME			"##rename"
+# define EDIT			"##edit"
+# define DELETE			"##delete"
+# define MODIFER_COUNT	7
 
 
 //longtype defines
@@ -99,18 +99,27 @@ typedef struct		s_path_set
 
 //------------------------ffahey part----------------------------
 
+void			ft_start_mod(t_farm *farm, char *command);
+void			ft_end_mod(t_farm *farm, char *command);
+void			ft_restart_mod(t_farm *farm, char *command);
+void			ft_reend_mod(t_farm *farm, char *command);
+void			ft_rename_mod(t_farm *farm, char *command);
+void			ft_edit_mod(t_farm *farm, char *command);
+void			ft_delete_mod(t_farm *farm, char *command);
+
 typedef void	(*t_modifer_function)(t_farm *farm);
 
 void			ft_start_mod(t_farm *farm);
 void			ft_end_mod(t_farm *farm);
 
 //allocation_functions
-t_room		*ft_create_room(char **data);
+t_room		*ft_create_room(t_farm *farm, char **data);
 void		ft_add_room(t_farm *farm, char **data);
 t_farm		*ft_create_farm();
 void		ft_ants_generator(t_farm *farm);
 
 //free functions
+void		ft_room_delete(t_room **rooms, t_room *room);
 void		ft_room_destroyer(t_room **room);
 void		ft_farm_destroyer(t_farm *farm);
 
@@ -119,8 +128,10 @@ int			ft_is_modifer(char	*input_data, t_farm *farm);
 t_farm		*ft_init_farm();
 int			ft_read_rooms(t_farm *farm, char **data);
 int			ft_read_room(t_farm *farm, char *data);
+void		ft_rooms_reverse(t_room **roms);
 t_room		*ft_find_room(t_room *rooms, char *name);
 void		ft_error_output(t_farm *farm, const char *error_message);
+void		ft_print_farm_structure(t_farm *farm);
 
 //kmedhurs part
 

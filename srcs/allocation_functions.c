@@ -6,14 +6,13 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 17:18:10 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/05 17:42:24 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/05 18:12:20 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-
-t_farm		*ft_create_farm()
+t_farm		*ft_create_farm(void)
 {
 	t_farm	*farm;
 
@@ -45,43 +44,48 @@ void		ft_ants_generator(t_farm *farm)
 	}
 }
 
-t_room		*ft_create_room(char **tab)
+t_room		*ft_create_room(t_farm *farm, char **tab)
 {
-	static	int	idd;
-	t_room	*room;
+	t_room		*room;
+	static int	id;
 
 	room = NULL;
-	if (tab)
+	if (!tab || !farm)
+		return (NULL);
+	if (!ft_is_str_integer(tab[1]) || !ft_is_str_integer(tab[2]))
 	{
-		if (!(room = (t_room*)malloc(sizeof(t_room))))
-			exit(OUT_OF_MEMORY);
-		room->name = tab[0];
-		room->links = NULL;
-		room->id = idd++;
-		room->degree = 0;
-		room->x = ft_atoi(tab[1]);
-		room->y = ft_atoi(tab[2]);
-		room->state = 0;
-		room->next = 0;
-		free(tab[1]);
-		free(tab[2]);
-		free(tab);
+		ft_free_tab(&tab);
+		ft_error_output(farm, "Coords must be integer");
 	}
+	if (!(room = (t_room*)malloc(sizeof(t_room))))
+		exit(OUT_OF_MEMORY);
+	room->id = id++;
+	room->name = tab[0];
+	room->links = NULL;
+	room->degree = 0;
+	room->x = ft_atoi(tab[1]);
+	room->y = ft_atoi(tab[2]);
+	room->state = 0;
+	room->next = 0;
+	free(tab[1]);
+	free(tab[2]);
+	free(tab);
 	return (room);
 }
 
 void		ft_add_room(t_farm *farm, char **data)
 {
 	t_room		*new_room;
-	
-	if (data)
+	t_room		*rooms;
+
+	if (farm && data)
 	{
 		if (ft_find_room(farm->rooms, data[0]))
 		{
-				ft_free_tab(&data);
-				ft_error_output(farm, "Room`s name alredy exist");
+			ft_free_tab(&data);
+			ft_error_output(farm, "Room`s name alredy exist");
 		}
-		new_room = ft_create_room(data);
+		new_room = ft_create_room(farm, data);
 		new_room->next = farm->rooms;
 		farm->rooms = new_room;
 	}

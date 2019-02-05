@@ -6,13 +6,13 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 19:20:07 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/05 17:45:38 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/05 18:15:02 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		main()
+int		main(void)
 {
 	t_farm		*farm;
 	t_path_set	*set;

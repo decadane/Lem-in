@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   modifers_functions.c                               :+:      :+:    :+:   */
+/*   modifer_functions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:09:35 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/05 17:44:49 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/05 18:16:36 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ static void		ft_init_modifer_string(char **mod_str)
 {
 	mod_str[0] = START;
 	mod_str[1] = END;
-//	mod_str[2] = RESTART;
-//	mod_str[3] = REEND;
-//	mod_str[4] = RENAME;
-//	mod_str[5] = EDIT;
-//	mod_str[6] = DELETE;
+	mod_str[2] = RESTART;
+	mod_str[3] = REEND;
+	mod_str[4] = RENAME;
+	mod_str[5] = EDIT;
+	mod_str[6] = DELETE;
 	mod_str[MODIFER_COUNT] = NULL;
 }
 
@@ -28,11 +28,11 @@ static void		ft_init_modifer_functions(t_modifer_function *mod_func)
 {
 	mod_func[0] = ft_start_mod;
 	mod_func[1] = ft_end_mod;
-//	mod_func[2] = ft_restart_mod;
-//	mod_func[3] = ft_reend_mod;
-//	mod_func[4] = ft_rename_mod;
-//	mod_func[5] = ft_edit_mod;
-//	mod_func[6] = ft_delete_mod;
+	mod_func[2] = ft_restart_mod;
+	mod_func[3] = ft_reend_mod;
+	mod_func[4] = ft_rename_mod;
+	mod_func[5] = ft_edit_mod;
+	mod_func[6] = ft_delete_mod;
 	mod_func[MODIFER_COUNT] = NULL;
 }
 
@@ -50,12 +50,12 @@ static int		ft_find_index(char *mod, char **mod_str)
 	return (-1);
 }
 
-int		ft_is_modifer(char *mod, t_farm *farm)
+int				ft_is_modifer(char *mod, t_farm *farm)
 {
 	static char					*mod_str[MODIFER_COUNT + 1];
 	static t_modifer_function	mod_func[MODIFER_COUNT + 1];
 	int							mod_index;
-	
+
 	if (*mod_str == NULL)
 		ft_init_modifer_string(mod_str);
 	if (*mod_func == NULL)
