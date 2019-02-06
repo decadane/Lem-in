@@ -6,7 +6,7 @@
 #    By: ffahey <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/29 19:04:47 by ffahey            #+#    #+#              #
-#    Updated: 2019/02/05 19:29:50 by ffahey           ###   ########.fr        #
+#    Updated: 2019/02/06 16:59:32 by ffahey           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ LIB_NAME=libft.a
 SRC=allocation_functions.c free_functions.c ft_error_output.c \
 	ft_init_farm.c lem_in.c ft_read_rooms.c \
 	modifer_commands.c modifer_functions.c ft_print_farm_structure.c \
-	ft_rooms_reverse.c modifer_commands2.c
+	ft_rooms_reverse.c modifer_commands2.c ft_find_routes.c
 OBJ=$(addprefix $(BIN_PATH)/,$(SRC:.c=.o))
 
 .PHONY: all clean fclean re

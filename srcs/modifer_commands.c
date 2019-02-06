@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 16:40:28 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/05 19:32:22 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/06 17:55:32 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_start_mod(t_farm *farm)
 		ft_error_output(farm, "After modifer must be valid line");
 	if (ft_read_room(farm, data) != 3)
 		ft_error_output(farm, "Wrong format for read room");
+	farm->rooms->state = START_ROOM;
 	farm->start = farm->rooms->name;
 	free(data);
 }
@@ -41,6 +42,7 @@ void	ft_end_mod(t_farm *farm)
 	if (ft_read_room(farm, data) != 3)
 		ft_error_output(farm, "Wrong format for read room");
 	farm->end = farm->rooms->name;
+	farm->rooms->state = END_ROOM;
 	free(data);
 }
 

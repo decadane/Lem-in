@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 17:42:25 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/05 19:34:15 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/06 19:50:29 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,25 @@ typedef struct		s_farm
 	char			**ants;
 }					t_farm;
 
+typedef struct		s_step
+{
+	t_room			*room;
+	struct s_step	*parent;
+	struct s_step	*next;
+}					t_step;
+
+typedef struct		s_path
+{
+	t_room			*room;
+	struct s_path	*next;
+}					t_path;
+
+typedef struct		s_routes
+{
+	t_path			*routes;
+	struct s_routes	*next;
+}					t_routes;
+
 typedef void	(*t_modifer_function)(t_farm *farm);
 
 void			ft_start_mod(t_farm *farm);
@@ -96,6 +115,7 @@ void		ft_rooms_reverse(t_room **roms);
 t_room		*ft_find_room(t_room *rooms, char *name);
 void		ft_error_output(t_farm *farm, const char *error_message);
 void		ft_print_farm_structure(t_farm *farm);
+void		ft_find_routes(t_farm *farm);
 
 //kmedhurs part
 
