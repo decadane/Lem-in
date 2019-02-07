@@ -6,13 +6,13 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 20:49:40 by kcarrot           #+#    #+#             */
-/*   Updated: 2019/02/07 18:24:28 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/07 19:01:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-/* static void				print_bits(unsigned char octet)
+static void				print_bits(unsigned char octet)
 {
 	int		x;
 	char	res[8];
@@ -26,7 +26,7 @@
 	write(1, res, 8);
 }
 
-static void				print_matrix(unsigned char **cross_m, int l)
+void				print_matrix(unsigned char **cross_m, int l)
 {
 	int i;
 	int j;
@@ -47,20 +47,17 @@ static void				print_matrix(unsigned char **cross_m, int l)
 		i++;
 		ft_putstr("\n\n");
 	}
-}  */
+}
 
 int						no_crosses(unsigned char **cross_m,
 							int *res, int j, int mv)
 {
 	unsigned char	check;
 
-	C(1)
 	while (*res != -1)
 	{
-	C(2)
-		printf("%p\n", &(cross_m[*res][j]));
+	print_matrix(cross_m, j);
 		check = cross_m[*res][j] >> mv;
-	C(3)
 		if (check & (unsigned char)1)
 			return (0);
 		res++;
