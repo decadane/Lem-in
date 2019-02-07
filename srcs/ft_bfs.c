@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:52:17 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/07 14:32:03 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/07 18:05:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static t_path_set	*ft_convert_to_arr(t_ps *ps)
 	int			i;
 	t_ps		*tmp;
 
+	if (!ps)
+		return (NULL);
 	i = -1;
 	tmp = ps;
 	set = (t_path_set*)malloc(sizeof(t_path_set));
@@ -32,7 +34,8 @@ static t_path_set	*ft_convert_to_arr(t_ps *ps)
 		set->ants[i] = 0;
 		ps = ps->next;
 	}
-	ft_ps_destroyer(tmp);
+	ps = tmp;
+//	ft_ps_destroyer(tmp);
 	return (set);
 }
 
@@ -61,15 +64,6 @@ static void			ft_bfs(t_path **room_queue, t_ps **path_queue, t_ps **result)
 	ft_path_destroyer(path);
 }
 
-static t_path_set	*ft_check_solution(t_farm *farm, t_ps *result)
-{
-	t_path_set	*set;
-
-	set = ft_convert_to_arr(result);
-	find_paths(farm->ants_count, set);
-	return (set);
-}
-	
 static void			ft_find_start_room(t_farm *farm, t_path **queue)
 {
 	int		i;
@@ -90,7 +84,7 @@ t_path_set			*ft_start_bfs(t_farm *farm, int nop)
 {
 	t_ps	*path_queue;
 	t_path	*queue;
-	int		i;
+	int		min_paths;
 	t_ps	*result;
 	t_path_set	*set;
 
@@ -98,16 +92,23 @@ t_path_set			*ft_start_bfs(t_farm *farm, int nop)
 	queue = NULL;
 	result = NULL;
 	ft_find_start_room(farm, &queue);
-	i = 5;
+	min_paths = DELTA_PATHS;
 	while (queue)
 	{
 		ft_bfs(&queue, &path_queue, &result);			
-		if ((int)ft_num_paths(result) == i)
+		if ((int)ft_num_paths(result) == min_paths)
 		{
-			set = ft_check_solution(farm, result);
-			if ((int)set->num_of_paths == nop)
+			set = ft_convert_to_arr(result);
+			set->ants_count = farm->ants_count;
+			set = find_paths(farm->ants_count, set, nop);
+			if ((int)set->num_of_paths >= nop)
 				return (set);
+			else
+				min_paths += DELTA_PATHS;
 		}
 	}
-	return (NULL);
+	set = ft_convert_to_arr(result);
+	set->ants_count = farm->ants_count;
+	set = find_paths(farm->ants_count, set, nop);
+	return (set);
 }
