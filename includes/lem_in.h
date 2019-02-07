@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 19:15:38 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/07 13:34:07 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/07 14:27:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define ANT(i)	farm->ants[i]
 # define LINKS	farm->links
 
+# define MIN(x, y) x < y ? x : y
 
 typedef struct			s_room
 {
@@ -150,7 +151,7 @@ t_path				*ft_pop_path_line(t_ps **line);
 void				ft_print_path(t_path *path);
 void				ft_ps_destroyer(t_ps *ps);
 
-t_path_set			*ft_start_bfs(t_farm *farm);
+t_path_set			*ft_start_bfs(t_farm *farm, int num_of_paths);
 int					ft_check_path(t_path *path, int id);
 void				ft_path_destroyer(t_path *path);
 
