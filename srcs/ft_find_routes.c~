@@ -6,7 +6,7 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 16:16:33 by kcarrot           #+#    #+#             */
-/*   Updated: 2019/02/07 21:12:16 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/07 17:49:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void		free_matrix(unsigned char **cross_m, size_t num)
 	free(cross_m);
 }
 
-static void		clear_all(unsigned char **matrix, t_path_set *res,
+/*static void		clear_all(unsigned char **matrix, t_path_set *res,
 							int *arr, size_t path_num)
 {
 	int	i;
@@ -33,7 +33,7 @@ static void		clear_all(unsigned char **matrix, t_path_set *res,
 	free_matrix(matrix, path_num);
 	free(arr);
 	i = res->num_of_paths - 1;
-	/*while (i >= 0)
+	while (i >= 0)
 	{
 		free((res->paths)[i]);
 		i--;
@@ -42,7 +42,7 @@ static void		clear_all(unsigned char **matrix, t_path_set *res,
 	free(res->lens);
 	free(res->ants);
 	free(res);
-*/}
+	}*/
 
 static int		find_num(int *best)
 {
@@ -62,7 +62,7 @@ t_path_set		*find_paths(int ants_c, t_path_set *set, int nop)
 	size_t				j;
 
 	cross_m = make_cross_matrix(set->paths, set->num_of_paths);
-//	print_matrix(cross_m, set->num_of_paths);
+	printf("THIS IS NUM OF PATHS: %zu \n", set->num_of_paths);
 	best = find_best_path(ants_c, set, cross_m);
 	res = (t_path_set*)malloc(sizeof(t_path_set));
 	res->num_of_paths = find_num(best);
@@ -84,6 +84,6 @@ t_path_set		*find_paths(int ants_c, t_path_set *set, int nop)
 	//else
 		//while (v_move_ants(ants_c, res))
 			//somegraficfunction();
-	clear_all(cross_m, res, best, set->num_of_paths);
+	//clear_all(cross_m, res, best, set->num_of_paths);
 	return (res);
 }

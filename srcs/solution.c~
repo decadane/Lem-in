@@ -6,7 +6,7 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 18:36:20 by kcarrot           #+#    #+#             */
-/*   Updated: 2019/02/07 21:15:31 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/07 18:04:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ static int		preparations(int *res, int *n)
 	while (res[end] != -1)
 		end++;
 	res[end] = *n;
-	*n = (*n < 0) ? 0 : *n + 1;
-	mv = 7 - *n % 8;
+	*n += (*n < 0) ? 1 : 0;
+	mv = 8 - *n % 8;
 	*n = *n / 8;
 	return (mv);
 }
@@ -57,26 +57,20 @@ int				*recursion(t_path_set *set, int *res,
 	end = set->num_of_paths / 8 + (set->num_of_paths % 8) ? 1 : 0;
 	while (n < end)
 	{
-	  printf("END: %i \n", end);
-	  printf("N: %i \n", n);
-	  while (mv >= 0)
-	  {
-	    printf("mv: %i \n", mv);
-	    if (no_crosses(cross_m, res, n, mv))
-		 {
-			ii = n * 8 + (7 - mv);
-			res2 = recursion(set, res, cross_m, ii);
-			if (total_path_len(res2, set->ants_count, set->lens) <
-				total_path_len(res, set->ants_count, set->lens))
+		while (mv--)
+			if (no_crosses(cross_m, res, n, mv))
 			{
-				free(res);
-				res = res2;
+				ii = n * 8 + (7 - mv);
+				res2 = recursion(set, res, cross_m, ii);
+				if (total_path_len(res2, set->ants_count, set->lens) <
+					total_path_len(res, set->ants_count, set->lens))
+				{
+					free(res);
+					res = res2;
+				}
 			}
-		}
-		mv--;
-	    }
 		n++;
-		mv = 7;
+		mv = 8;
 	}
 	return (res);
 }
@@ -112,8 +106,7 @@ int				*find_best_path(size_t ants, t_path_set *set,
 	i = 0;
 	while (i < set->num_of_paths)
 	{
-	  printf("HERE");
-	  res2 = check_each_comb(cross_m, set, i);
+		res2 = check_each_comb(cross_m, set, i);
 		if (total_path_len(res2, ants, set->lens) < min)
 		{
 			free(res);
