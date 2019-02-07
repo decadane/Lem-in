@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 13:50:38 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/05 17:56:24 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/07 15:56:23 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	ft_print_room(t_room *room)
 	printf("Links count: %d\n", room->degree);
 	printf("Links:\n");
 	i = 0;
-	while (room->links[i])
+	while (room->links && room->links[i])
 	{
 		printf("\t%s(%d)\n", room->links[i]->name, room->links[i]->id);
 		i++;
