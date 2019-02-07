@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 19:20:07 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/07 17:09:17 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/07 18:07:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,6 @@ int		main(void)
 	num_of_paths = MIN(MIN((int)farm->ants_count, start->degree), end->degree);
 	ft_print_farm(farm);
 	set = ft_start_bfs(farm, num_of_paths);
-	ft_print_path(set->paths[0]);
-	ft_print_path(set->paths[1]);
-	printf("%d\n", num_of_paths);
 	if (!set)
 		ft_error_output(farm, "No possible solutions");
 	ft_farm_destroyer(farm);

@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 19:15:38 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/07 16:55:06 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/07 18:08:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define EDIT			"##edit"
 # define DELETE			"##delete"
 # define MODIFER_COUNT	7
-# define DELTA_PATHS	5
+# define DELTA_PATHS	1
 
 
 //longtype defines
@@ -97,6 +97,7 @@ typedef struct		s_path_set
 	size_t			*lens;
 	size_t			*ants;
 	size_t			num_of_paths;
+	int				ants_count;
 }					t_path_set;
 
 //------------------------ffahey part----------------------------
@@ -166,6 +167,10 @@ void				move_ants(int ants_c, t_path_set *paths);
 t_list				*move_ants_v();
 //return list of moving ants for each iteration;
 t_path_set			*find_paths(int ants_c, t_path_set *set, int nop);
+int					*find_best_path(size_t ants, t_path_set *set,
+		unsigned char **cross_m);
+t_ant				**create_ants(size_t num);
+int					no_crosses(unsigned char **cross_m, int *res, int j, int mv);
 static int num = 1; // Для итоговой нумерации муравьев
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:52:17 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/07 17:00:09 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/07 18:05:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ t_path_set			*ft_start_bfs(t_farm *farm, int nop)
 		if ((int)ft_num_paths(result) == min_paths)
 		{
 			set = ft_convert_to_arr(result);
+			set->ants_count = farm->ants_count;
 			set = find_paths(farm->ants_count, set, nop);
 			if ((int)set->num_of_paths >= nop)
 				return (set);
@@ -107,6 +108,7 @@ t_path_set			*ft_start_bfs(t_farm *farm, int nop)
 		}
 	}
 	set = ft_convert_to_arr(result);
+	set->ants_count = farm->ants_count;
 	set = find_paths(farm->ants_count, set, nop);
 	return (set);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cross_matrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/07 17:28:07 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/07 17:28:44 by marvin           ###   ########.fr       */
+/*   Created: 2019/01/31 20:49:40 by kcarrot           #+#    #+#             */
+/*   Updated: 2019/02/07 18:24:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,13 @@ int						no_crosses(unsigned char **cross_m,
 {
 	unsigned char	check;
 
+	C(1)
 	while (*res != -1)
 	{
+	C(2)
+		printf("%p\n", &(cross_m[*res][j]));
 		check = cross_m[*res][j] >> mv;
+	C(3)
 		if (check & (unsigned char)1)
 			return (0);
 		res++;
