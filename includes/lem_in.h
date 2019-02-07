@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 19:15:38 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/05 19:40:42 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/07 13:34:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,8 @@ t_room				*ft_search_node(t_room *room, int id);
 t_path				*ft_complete_path(t_path *path, t_room *ptr);
 t_ps				*ft_new_path(t_ps *ps, t_path *path);
 t_path				*ft_copy_path(t_path *path);
+t_room				*ft_pop_path(t_path **path);
+t_path				*ft_pop_path_line(t_ps **line);
 
 void				ft_print_path(t_path *path);
 void				ft_ps_destroyer(t_ps *ps);
