@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:52:17 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/07 18:05:22 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/07 20:40:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static t_path_set	*ft_convert_to_arr(t_ps *ps)
 	return (set);
 }
 
-static void			ft_bfs(t_path **room_queue, t_ps **path_queue, t_ps **result)
+static void			ft_bfs(t_path **room_queue, t_ps **path_queue, t_ps **result, int max_len)
 {
 	t_room	*room;
 	t_path	*path;
@@ -51,6 +51,8 @@ static void			ft_bfs(t_path **room_queue, t_ps **path_queue, t_ps **result)
 	if (!(ft_check_path(path, room->id)))
 		return ;
 	path = ft_complete_path(path, room);
+	if ((int)ft_path_len(path) > max_len)
+		return ;
 	if (room->state == END_ROOM)
 	{
 		*result = ft_new_path(*result, path);
@@ -80,6 +82,32 @@ static void			ft_find_start_room(t_farm *farm, t_path **queue)
 	farm->rooms = tmp;
 }
 
+static int			ft_max_len(t_ps *result, int ac)
+{
+	int		num_of_paths;
+	int		max_len;
+	int		i;
+	t_ps	*tmp;
+	int		len_sum;
+
+	if (!result)
+		return (9999);
+	tmp = result;
+	i = 0;
+	num_of_paths = ft_num_paths(result);
+	len_sum = 0;
+	while (i < num_of_paths)
+	{
+		len_sum += ft_path_len(result->path);
+		result = result->next;
+		i++;
+	}
+	result = tmp;
+	max_len = ((len_sum + ac) / num_of_paths) * (num_of_paths + 1) - ac - len_sum;
+	printf("Max len: : %d\n", max_len);
+	return (max_len);
+}
+
 t_path_set			*ft_start_bfs(t_farm *farm, int nop)
 {
 	t_ps	*path_queue;
@@ -92,10 +120,11 @@ t_path_set			*ft_start_bfs(t_farm *farm, int nop)
 	queue = NULL;
 	result = NULL;
 	ft_find_start_room(farm, &queue);
-	min_paths = DELTA_PATHS;
+	min_paths = 1;
 	while (queue)
 	{
-		ft_bfs(&queue, &path_queue, &result);			
+		ft_bfs(&queue, &path_queue, &result, ft_max_len(result,
+					farm->ants_count));			
 		if ((int)ft_num_paths(result) == min_paths)
 		{
 			set = ft_convert_to_arr(result);
@@ -110,5 +139,8 @@ t_path_set			*ft_start_bfs(t_farm *farm, int nop)
 	set = ft_convert_to_arr(result);
 	set->ants_count = farm->ants_count;
 	set = find_paths(farm->ants_count, set, nop);
+	ft_print_path(set->paths[0]);
+	ft_print_path(set->paths[1]);
+	ft_print_path(set->paths[2]);
 	return (set);
 }

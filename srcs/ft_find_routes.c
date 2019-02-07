@@ -6,7 +6,7 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 16:16:33 by kcarrot           #+#    #+#             */
-/*   Updated: 2019/02/07 17:49:48 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/07 20:31:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ static void		clear_all(unsigned char **matrix, t_path_set *res,
 	{
 		free((res->paths)[i]);
 		i--;
-	}*/
+	}
 	free(res->paths);
 	free(res->lens);
 	free(res->ants);
 	free(res);
-}
+*/}
 
 static int		find_num(int *best)
 {
@@ -62,6 +62,7 @@ t_path_set		*find_paths(int ants_c, t_path_set *set, int nop)
 	size_t				j;
 
 	cross_m = make_cross_matrix(set->paths, set->num_of_paths);
+//	print_matrix(cross_m, set->num_of_paths);
 	best = find_best_path(ants_c, set, cross_m);
 	res = (t_path_set*)malloc(sizeof(t_path_set));
 	res->num_of_paths = find_num(best);
