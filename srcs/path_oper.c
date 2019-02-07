@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 17:35:46 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/07 17:03:37 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/07 21:28:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ void	ft_print_farm(t_farm *farm)
 		printf("Name: %s, Degree: %d, ID: %d, State: %d", farm->rooms->name, farm->rooms->degree, farm->rooms->id, farm->rooms->state);
 		j = -1;
 		while (++j < farm->rooms->degree)
-			printf(" Ptr: %d", farm->rooms->links[j]->id);
+			printf(" Ptr: %s", farm->rooms->links[j]->name);
 		printf("\n");
 		farm->rooms = farm->rooms->next;
 	}

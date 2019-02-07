@@ -6,7 +6,7 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 18:36:20 by kcarrot           #+#    #+#             */
-/*   Updated: 2019/02/07 21:15:31 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/07 21:24:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,8 @@ int				*recursion(t_path_set *set, int *res,
 	end = set->num_of_paths / 8 + (set->num_of_paths % 8) ? 1 : 0;
 	while (n < end)
 	{
-	  printf("END: %i \n", end);
-	  printf("N: %i \n", n);
 	  while (mv >= 0)
 	  {
-	    printf("mv: %i \n", mv);
 	    if (no_crosses(cross_m, res, n, mv))
 		 {
 			ii = n * 8 + (7 - mv);
@@ -112,7 +109,6 @@ int				*find_best_path(size_t ants, t_path_set *set,
 	i = 0;
 	while (i < set->num_of_paths)
 	{
-	  printf("HERE");
 	  res2 = check_each_comb(cross_m, set, i);
 		if (total_path_len(res2, ants, set->lens) < min)
 		{

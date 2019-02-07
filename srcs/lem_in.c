@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 19:20:07 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/07 20:34:46 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/07 21:35:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int		main(void)
 	}
 	farm->rooms = tmp;
 	num_of_paths = MIN(MIN((int)farm->ants_count, start->degree), end->degree);
+	printf("%d\n", num_of_paths);
 	ft_print_farm(farm);
 	set = ft_start_bfs(farm, num_of_paths);
 	if (!set)

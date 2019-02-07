@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:52:17 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/07 21:07:34 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/07 21:37:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ static int			ft_max_len(t_ps *result, int ac)
 	}
 	result = tmp;
 	max_len = ((len_sum + ac) / num_of_paths) * (num_of_paths + 1) - ac - len_sum;
-	printf("Max len: : %d\n", max_len);
 	return (max_len);
 }
 
@@ -136,11 +135,9 @@ t_path_set			*ft_start_bfs(t_farm *farm, int nop)
 				min_paths += DELTA_PATHS;
 		}
 	}
+	nop = 0;
 	set = ft_convert_to_arr(result);
 	set->ants_count = farm->ants_count;
 	set = find_paths(farm->ants_count, set, nop);
-	ft_print_path(set->paths[0]);
-	ft_print_path(set->paths[1]);
-	ft_print_path(set->paths[2]);
 	return (set);
 }

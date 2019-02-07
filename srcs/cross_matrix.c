@@ -6,12 +6,12 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 20:49:40 by kcarrot           #+#    #+#             */
-/*   Updated: 2019/02/07 21:04:49 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/07 21:24:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
+/*
 static void				print_bits(unsigned char octet)
 {
 	int		x;
@@ -48,7 +48,7 @@ void				print_matrix(unsigned char **cross_m, int l)
 		ft_putstr("\n\n");
 	}
 }
-
+*/
 int						no_crosses(unsigned char **cross_m,
 							int *res, int j, int mv)
 {
@@ -60,9 +60,9 @@ int						no_crosses(unsigned char **cross_m,
 	while (res[i] != -1)
 	{
 	  //	C(2)
-	  printf("----------%i-------\n", res[i]);
-	  printf("----------%i-------\n", mv);
-	  printf("%p\n",cross_m[res[i]]);
+//	  printf("----------%i-------\n", res[i]);
+//	  printf("----------%i-------\n", mv);
+//	  printf("%p\n",cross_m[res[i]]);
 	  
 	check = cross_m[res[i]][j] >> mv;
 		//	C(3)
@@ -140,6 +140,6 @@ unsigned char			**make_cross_matrix(t_path **paths, int l)
 	while (rows < l)
 		set_bits(paths, matrix, &rows, l);
 	matrix[rows] = NULL;
-	print_matrix(matrix, l);
+//	print_matrix(matrix, l);
 	return (matrix);
 }
