@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/25 13:22:01 by ffahey            #+#    #+#             */
-/*   Updated: 2019/01/30 20:29:10 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/05 16:00:30 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_itoa(int n)
 			res[size] = num % 10 + '0';
 			num /= 10;
 		}
-		res[size] = size ? res[size] : '-';
+		size == 0 ? res[size] = '-' : 0;
 	}
 	return (res);
 }

@@ -6,60 +6,11 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:52:17 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/02 19:21:02 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/07 18:05:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
-
-static void			ft_bfs(t_path *path, t_ps **ps, t_room *room, size_t ac)
-{
-	int		i;
-
-	i = -1;
-	if (!ft_check_path(path, room->id) || ft_path_len(path) > ac)
-	{
-		ft_path_destroyer(path);
-		return ;
-	}
-	path = ft_complete_path(path, room);
-	if (room->state == END_ROOM)
-	{
-		*ps = ft_new_path(*ps, path);
-		return ;
-	}
-	while (++i < room->degree)
-	{
-		ft_bfs(ft_copy_path(path), ps, room->links[i], ac);
-	}
-	ft_path_destroyer(path);
-}
-
-static void			ft_sort_path_set(t_path_set *set)
-{
-	size_t	tmp_st;
-	t_path	*tmp_p;
-	int		i;
-	int		j;
-
-	i = -1;
-	while (++i < (int)set->num_of_paths)
-	{
-		j = -1;
-		while (++j < (int)set->num_of_paths - i - 1)
-		{
-			if (set->lens[j] > set->lens[j + 1])
-			{
-				tmp_st = set->lens[j];
-				set->lens[j] = set->lens[j + 1];
-				set->lens[j + 1] = tmp_st;
-				tmp_p = set->paths[j];
-				set->paths[j] = set->paths[j + 1];
-				set->paths[j + 1] = tmp_p;
-			}
-		}
-	}
-}
+#include "lem_in.h"
 
 static t_path_set	*ft_convert_to_arr(t_ps *ps)
 {
@@ -67,6 +18,8 @@ static t_path_set	*ft_convert_to_arr(t_ps *ps)
 	int			i;
 	t_ps		*tmp;
 
+	if (!ps)
+		return (NULL);
 	i = -1;
 	tmp = ps;
 	set = (t_path_set*)malloc(sizeof(t_path_set));
@@ -81,33 +34,81 @@ static t_path_set	*ft_convert_to_arr(t_ps *ps)
 		set->ants[i] = 0;
 		ps = ps->next;
 	}
-	ft_sort_path_set(set);
-	ft_ps_destroyer(tmp);
+	ps = tmp;
+//	ft_ps_destroyer(tmp);
 	return (set);
 }
 
-t_path_set			*ft_start_bfs(t_farm *farm)
+static void			ft_bfs(t_path **room_queue, t_ps **path_queue, t_ps **result)
 {
-	t_ps		*ps;
-	t_path		*path;
-	t_path_set	*set;
-	int			i;
-	t_room		*tmp;
+	t_room	*room;
+	t_path	*path;
+	int		i;
 
 	i = -1;
-	set = NULL;
-	ps = NULL;
-	path = NULL;
+	path = ft_pop_path_line(path_queue);
+	room = ft_pop_path(room_queue);
+	if (!(ft_check_path(path, room->id)))
+		return ;
+	path = ft_complete_path(path, room);
+	if (room->state == END_ROOM)
+	{
+		*result = ft_new_path(*result, path);
+		return ;
+	}
+	while (++i < room->degree)
+	{
+		*room_queue = ft_complete_path(*room_queue, room->links[i]);
+		*path_queue = ft_new_path(*path_queue, ft_copy_path(path));
+	}
+	ft_path_destroyer(path);
+}
+
+static void			ft_find_start_room(t_farm *farm, t_path **queue)
+{
+	int		i;
+	t_room	*tmp;
+
+	i = -1;
 	tmp = farm->rooms;
 	while (++i < (int)farm->rooms_count)
 	{
 		if (farm->rooms->state == START_ROOM)
-		{
-			ft_bfs(path, &ps, farm->rooms, farm->ants_count);
-		}
+			*queue = ft_complete_path(*queue, farm->rooms);
 		farm->rooms = farm->rooms->next;
 	}
 	farm->rooms = tmp;
-	set = ft_convert_to_arr(ps);
+}
+
+t_path_set			*ft_start_bfs(t_farm *farm, int nop)
+{
+	t_ps	*path_queue;
+	t_path	*queue;
+	int		min_paths;
+	t_ps	*result;
+	t_path_set	*set;
+
+	path_queue = NULL;
+	queue = NULL;
+	result = NULL;
+	ft_find_start_room(farm, &queue);
+	min_paths = DELTA_PATHS;
+	while (queue)
+	{
+		ft_bfs(&queue, &path_queue, &result);			
+		if ((int)ft_num_paths(result) == min_paths)
+		{
+			set = ft_convert_to_arr(result);
+			set->ants_count = farm->ants_count;
+			set = find_paths(farm->ants_count, set, nop);
+			if ((int)set->num_of_paths >= nop)
+				return (set);
+			else
+				min_paths += DELTA_PATHS;
+		}
+	}
+	set = ft_convert_to_arr(result);
+	set->ants_count = farm->ants_count;
+	set = find_paths(farm->ants_count, set, nop);
 	return (set);
 }

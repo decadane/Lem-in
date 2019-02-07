@@ -6,11 +6,11 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 17:35:46 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/02 19:12:28 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/07 17:03:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 t_path	*ft_complete_path(t_path *path, t_room *room)
 {
@@ -81,13 +81,16 @@ void	ft_print_path(t_path *path)
 {
 	t_path	*head;
 
+	if (!path)
+		return ;
 	head = path;
 	printf("Path: ");
 	while (path)
 	{
-		printf("%d ", path->room->id);
+		printf("%s ", path->room->name);
 		path = path->next;
 	}
+	printf("\n");
 	path = head;
 }
 
@@ -164,4 +167,54 @@ size_t	ft_path_len(t_path *path)
 	}
 	path = head;
 	return (len);
+}
+//delete this func!
+void	ft_print_farm(t_farm *farm)
+{
+	int		i;
+	int		j;
+	t_room	*tmp;
+
+	i = -1;
+	tmp = farm->rooms;
+	while (++i < (int)farm->rooms_count)
+	{
+		printf("Name: %s, Degree: %d, ID: %d, State: %d", farm->rooms->name, farm->rooms->degree, farm->rooms->id, farm->rooms->state);
+		j = -1;
+		while (++j < farm->rooms->degree)
+			printf(" Ptr: %d", farm->rooms->links[j]->id);
+		printf("\n");
+		farm->rooms = farm->rooms->next;
+	}
+	farm->rooms = tmp;
+}
+
+t_room	*ft_pop_path(t_path **path)
+{
+	t_path	*tmp;
+	t_room	*res;
+
+	if (*path == NULL)
+		return (NULL);
+	tmp = *path;
+	*path = (*path)->next;
+	res = tmp->room;
+	free(tmp);
+	tmp = NULL;
+	return (res);
+}
+
+t_path	*ft_pop_path_line(t_ps **line)
+{
+	t_ps	*tmp;
+	t_path		*res;
+
+	if (*line == NULL)
+		return (NULL);
+	tmp = *line;
+	*line = (*line)->next;
+	res = tmp->path;
+	free(tmp);
+	tmp = NULL;
+	return (res);
 }

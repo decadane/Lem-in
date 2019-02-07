@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error_output.c                                  :+:      :+:    :+:   */
+/*   ft_rooms_reverse.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/31 17:28:00 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/05 18:13:20 by ffahey           ###   ########.fr       */
+/*   Created: 2019/02/05 14:36:25 by ffahey            #+#    #+#             */
+/*   Updated: 2019/02/05 17:44:06 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	ft_error_output(t_farm *farm, const char *error_message)
+void	ft_rooms_reverse(t_room **rooms)
 {
-	ft_putstr("ERROR\n");
-	ft_putstr(error_message);
-	ft_putchar('\n');
-	ft_farm_destroyer(farm);
-	exit(0);
+	t_room	*prev;
+	t_room	*current;
+	t_room	*next;
+
+	if (rooms && *rooms)
+	{
+		prev = NULL;
+		current = *rooms;
+		next = NULL;
+		while (current != NULL)
+		{
+			next = current->next;
+			current->next = prev;
+			prev = current;
+			current = next;
+		}
+		*rooms = prev;
+	}
 }
