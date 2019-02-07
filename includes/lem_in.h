@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 19:15:38 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/07 14:27:23 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/07 16:55:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define EDIT			"##edit"
 # define DELETE			"##delete"
 # define MODIFER_COUNT	7
+# define DELTA_PATHS	5
 
 
 //longtype defines
@@ -164,7 +165,7 @@ unsigned char		**make_cross_matrix(t_path **paths, int l);
 void				move_ants(int ants_c, t_path_set *paths);
 t_list				*move_ants_v();
 //return list of moving ants for each iteration;
-void				find_paths(int ants_c, t_path_set *set);
+t_path_set			*find_paths(int ants_c, t_path_set *set, int nop);
 static int num = 1; // Для итоговой нумерации муравьев
 
 #endif

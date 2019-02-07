@@ -6,7 +6,7 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 16:16:33 by kcarrot           #+#    #+#             */
-/*   Updated: 2019/02/05 17:43:28 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/07 17:29:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		total_path_len(int *i, int ants, size_t *path_len)
 	return (res);
 }
 
-int     no_crosses(unsigned char **cross_m, int *res, int j, int mv)
+int     no_crosses2(unsigned char **cross_m, int *res, int j, int mv)
 {
 	int	ii;
 
@@ -66,7 +66,7 @@ int		*recursion(t_path_set *set, int *res, unsigned char **cross_m, int ants, in
 	{
 		while (mv--)
 		{
-			if (no_crosses(cross_m, res, n, mv))
+			if (no_crosses2(cross_m, res, n, mv))
 			{
 				ii = n * 8 + (7 - mv);
 				//printf("\nthis is ii: %d\n", ii);
@@ -148,7 +148,7 @@ int		*find_best_path(size_t ants, t_path_set *set, unsigned char **cross_m) // �
 }
 
 
-
+/*
 void	find_paths(int ants_c, t_path_set *set) // Получаю все возможные пути. Поиск решения
 {
 	int					*best;
@@ -185,4 +185,38 @@ void	find_paths(int ants_c, t_path_set *set) // Получаю все возмо
 		//write(1, "\n12", 3);
 	}
 	move_ants(ants_c, res);
+}
+*/
+
+t_path_set		*find_paths(int ants_c, t_path_set *set, int nop) // Получаю все возможные пути. Поиск решения
+{
+	int				*best;
+	t_path_set		*res;
+	unsigned char	**cross_m;
+	int				i;
+	int				j;
+
+	cross_m = make_cross_matrix(set->paths, set->num_of_paths);
+	best = find_best_path(ants_c, set, cross_m);
+	i = 0;
+	while (best[i] != -1)
+		i++;
+	res = (t_path_set*)malloc(sizeof(t_path_set));
+	res->paths = (t_path**)malloc(sizeof(t_path*) * (i + 1));
+	res->num_of_paths = i;
+	res->lens = (size_t*)malloc(sizeof(size_t) * i);
+	res->ants = (size_t*)malloc(sizeof(size_t) * i);
+	j = 0;
+	while (j < i)
+   {	
+		(res->paths)[j] = (set->paths)[best[j]];
+		(res->lens)[j] = (set->lens)[best[j]];
+		(res->ants)[j] = 0;
+		j++;
+	}
+	(res->paths)[j] = NULL;
+//	clear_all(cross_m, res, best, set->num_of_paths);
+	if ((int)res->num_of_paths >= nop)
+		move_ants(ants_c, res);
+	return (res);
 }
