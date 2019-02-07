@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 17:35:46 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/05 17:45:11 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/06 20:47:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ void	ft_print_path(t_path *path)
 {
 	t_path	*head;
 
+	if (!path)
+		return ;
 	head = path;
 	printf("Path: ");
 	while (path)
@@ -88,6 +90,7 @@ void	ft_print_path(t_path *path)
 		printf("%d ", path->room->id);
 		path = path->next;
 	}
+	printf("\n");
 	path = head;
 }
 
@@ -184,4 +187,34 @@ void	ft_print_farm(t_farm *farm)
 		farm->rooms = farm->rooms->next;
 	}
 	farm->rooms = tmp;
+}
+
+t_room	*ft_pop_path(t_path **path)
+{
+	t_path	*tmp;
+	t_room	*res;
+
+	if (*path == NULL)
+		return (NULL);
+	tmp = *path;
+	*path = (*path)->next;
+	res = tmp->room;
+	free(tmp);
+	tmp = NULL;
+	return (res);
+}
+
+t_path	*ft_pop_path_line(t_ps **line)
+{
+	t_ps	*tmp;
+	t_path		*res;
+
+	if (*line == NULL)
+		return (NULL);
+	tmp = *line;
+	*line = (*line)->next;
+	res = tmp->path;
+	free(tmp);
+	tmp = NULL;
+	return (res);
 }
