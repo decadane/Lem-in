@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 11:33:14 by ffahey            #+#    #+#             */
-/*   Updated: 2019/01/27 19:38:49 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/08 13:29:34 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	ft_lst_print(t_list *head)
 	while (head)
 	{
 		ft_putstr(head->str);
+		ft_putchar('\n');
 		head = head->next;
 	}
 }

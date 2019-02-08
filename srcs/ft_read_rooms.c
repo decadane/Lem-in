@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 18:25:43 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/05 19:41:35 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/08 13:17:44 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int			ft_read_room(t_farm *farm, char *data)
 	int		split_count;
 	char	**tab;
 
+	ft_lst_add(&(farm->output), data);
 	if (!(tab = ft_strsplit(data, ' ')))
 		exit(OUT_OF_MEMORY);
 	split_count = 0;
@@ -63,6 +64,8 @@ void		ft_link_rooms(t_farm *farm, char *data)
 	t_room	*r2;
 	char	*defis;
 
+	
+	ft_lst_add(&(farm->output), data);
 	if (!(defis = ft_strchr(data, '-')))
 		ft_error_output(farm, "Wrong link room format");
 	*defis = '\0';

@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 19:20:07 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/07 20:34:46 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/08 13:29:57 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,21 @@
 int		main(void)
 {
 	t_farm		*farm;
-	t_path_set	*set;
-	int			num_of_paths;
-	int			i;
-	t_room		*start;
-	t_room		*end;
-	t_room		*tmp;
+//	t_path_set	*set;
+//	int			num_of_paths;
+//	int			i;
+//	t_room		*start;
+//	t_room		*end;
+//	t_room		*tmp;
 
-	i = -1;
+//	i = -1;
 	farm = NULL;
-	set = NULL;
+//	set = NULL;
 	farm = ft_init_farm();
+	ft_print_farm_structure(farm);
+	ft_lst_rev(&farm->output);
+	ft_lst_print(farm->output);
+	/*
 	tmp = farm->rooms;
 	while (++i < (int)farm->rooms_count)
 	{
@@ -47,6 +51,7 @@ int		main(void)
 	set = ft_start_bfs(farm, num_of_paths);
 	if (!set)
 		ft_error_output(farm, "No possible solutions");
+		*/
 	ft_farm_destroyer(farm);
 	return (0);
 }

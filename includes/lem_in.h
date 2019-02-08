@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 19:15:38 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/07 21:03:09 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/08 13:04:18 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct		s_farm
 	char			*end;
 	size_t			ants_count;
 	char			**ants;
+	t_list			*output;
 }					t_farm;
 
 typedef struct		s_path

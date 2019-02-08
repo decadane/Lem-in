@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 17:10:03 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/05 18:13:34 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/08 13:27:07 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void		ft_read_ants_count(t_farm *farm, char **data)
 
 	while (get_next_line(0, data) == 1)
 	{
+		ft_lst_add(&farm->output, *data);
 		if (ft_is_comment(*data))
 		{
 			ft_memdel((void**)data);

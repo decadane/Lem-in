@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:09:35 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/05 19:42:51 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/08 13:23:08 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int				ft_is_modifer(char *mod, t_farm *farm)
 	if (*mod_func == NULL)
 		ft_init_modifer_functions(mod_func);
 	mod_index = ft_find_index(mod, mod_str);
+	ft_lst_add(&(farm->output), mod);
 	if (mod_index < 0)
 		return (0);
 	else

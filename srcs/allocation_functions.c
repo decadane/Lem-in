@@ -6,7 +6,7 @@
 /*   By: ffahey <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 17:18:10 by ffahey            #+#    #+#             */
-/*   Updated: 2019/02/06 18:29:55 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/08 13:05:02 by ffahey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_farm		*ft_create_farm(void)
 	farm->end = NULL;
 	farm->ants_count = 0;
 	farm->ants = NULL;
+	farm->output = NULL;
 	return (farm);
 }
 
