@@ -6,7 +6,7 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 16:16:33 by kcarrot           #+#    #+#             */
-/*   Updated: 2019/02/07 21:12:16 by ffahey           ###   ########.fr       */
+/*   Updated: 2019/02/08 14:28:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ t_path_set		*find_paths(int ants_c, t_path_set *set, int nop)
 	unsigned char		**cross_m;
 	size_t				j;
 
+	if (!set)
+		return (NULL);
 	cross_m = make_cross_matrix(set->paths, set->num_of_paths);
 //	print_matrix(cross_m, set->num_of_paths);
 	best = find_best_path(ants_c, set, cross_m);

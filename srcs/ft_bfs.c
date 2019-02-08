@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:52:17 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/07 21:37:38 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/08 14:29:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static t_path_set	*ft_convert_to_arr(t_ps *ps)
 		set->paths[i] = ps->path;
 		set->lens[i] = ft_path_len(ps->path);
 		set->ants[i] = 0;
+	ft_print_path(set->paths[i]);
 		ps = ps->next;
 	}
 	ps = tmp;
@@ -51,7 +52,7 @@ static void			ft_bfs(t_path **room_queue, t_ps **path_queue, t_ps **result, int 
 	if (!(ft_check_path(path, room->id)))
 		return ;
 	path = ft_complete_path(path, room);
-	if ((int)ft_path_len(path) > max_len)
+	if ((int)ft_path_len(path) - 1  > max_len)
 		return ;
 	if (room->state == END_ROOM)
 	{
@@ -98,12 +99,13 @@ static int			ft_max_len(t_ps *result, int ac)
 	len_sum = 0;
 	while (i < num_of_paths)
 	{
-		len_sum += ft_path_len(result->path);
+		len_sum += ft_path_len(result->path) - 1;
 		result = result->next;
 		i++;
 	}
 	result = tmp;
-	max_len = ((len_sum + ac) / num_of_paths) * (num_of_paths + 1) - ac - len_sum;
+	max_len = ((len_sum + ac - num_of_paths) / num_of_paths) * (num_of_paths + 1) - ac - len_sum + (num_of_paths + 1);
+	printf("%d\n", max_len);
 	return (max_len);
 }
 
@@ -127,7 +129,8 @@ t_path_set			*ft_start_bfs(t_farm *farm, int nop)
 		if ((int)ft_num_paths(result) == min_paths)
 		{
 			set = ft_convert_to_arr(result);
-			set->ants_count = farm->ants_count;
+			if (set)
+				set->ants_count = farm->ants_count;
 			set = find_paths(farm->ants_count, set, nop);
 			if ((int)set->num_of_paths >= nop)
 				return (set);
@@ -137,7 +140,8 @@ t_path_set			*ft_start_bfs(t_farm *farm, int nop)
 	}
 	nop = 0;
 	set = ft_convert_to_arr(result);
-	set->ants_count = farm->ants_count;
+	if (set)
+		set->ants_count = farm->ants_count;
 	set = find_paths(farm->ants_count, set, nop);
 	return (set);
 }

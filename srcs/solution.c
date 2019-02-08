@@ -6,7 +6,7 @@
 /*   By: kcarrot <kcarrot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 18:36:20 by kcarrot           #+#    #+#             */
-/*   Updated: 2019/02/07 21:24:00 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/08 14:26:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ int				total_path_len(int *i, int ants, size_t *path_len)
 		len += path_len[i[p_num]];
 		p_num++;
 	}
-	res = (len % p_num) ? len / p_num + 1 : len / p_num;
+/*	res = (len % p_num) ? len / p_num + 1 : len / p_num;
 	res += (ants % p_num) ? ants / p_num : ants / p_num - 1;
+*/	res = (len + ants - p_num) / p_num;
 	return (res);
 }
 
